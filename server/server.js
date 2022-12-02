@@ -1,5 +1,6 @@
 const express = require('express');
 const morgan = require('morgan');
+const router = require('./routes');
 
 const app = express();
 
@@ -13,7 +14,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
 // Routes
-app.use(require('./routes/index.js'));
+app.use('/api', router);
 
 // Starting the server
 app.listen(app.get('port'), () => {
