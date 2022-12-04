@@ -31,4 +31,27 @@ router
     res.json({ Message: `Delete user with id: ${req.params.id}` });
   });
 
+// List Routes
+router
+  .route('/users/:id/lists')
+  .get((req, res) => {
+    res.json({ Message: `List of all lists for user with id: ${req.params.id}` });
+  })
+  .post((req, res) => {
+    console.log(req.body);
+    res.json({ Message: 'Successfully created a new list' });
+  });
+router
+  .route('/users/:id/lists/:listId')
+  .get((req, res) => {
+    res.json({ Message: `List with id: ${req.params.listId}` });
+  })
+  .put((req, res) => {
+    console.log(req.body);
+    res.json({ Message: `Update list with id: ${req.params.listId}` });
+  })
+  .delete((req, res) => {
+    res.json({ Message: `Delete list with id: ${req.params.listId}` });
+  });
+
 module.exports = router;
