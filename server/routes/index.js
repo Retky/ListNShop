@@ -77,4 +77,27 @@ router
     res.json({ Message: `Delete item with id: ${req.params.itemId}` });
   });
 
+// Shops Routes
+router
+  .route('/users/:id/shops')
+  .get((req, res) => {
+    res.json({ Message: `List of all shops for user with id: ${req.params.id}` });
+  })
+  .post((req, res) => {
+    console.log(req.body);
+    res.json({ Message: 'Successfully created a new shop' });
+  });
+router
+  .route('/users/:id/shops/:shopId')
+  .get((req, res) => {
+    res.json({ Message: `Shop with id: ${req.params.shopId}` });
+  })
+  .put((req, res) => {
+    console.log(req.body);
+    res.json({ Message: `Update shop with id: ${req.params.shopId}` });
+  })
+  .delete((req, res) => {
+    res.json({ Message: `Delete shop with id: ${req.params.shopId}` });
+  });
+
 module.exports = router;
