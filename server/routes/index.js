@@ -56,7 +56,7 @@ router
 
 // Item Routes
 router
-  .route('/users/:id/lists/:listId/items')
+  .route('/users/:id/items')
   .get((req, res) => {
     res.json({ Message: `List of all items for list with id: ${req.params.listId}` });
   })
@@ -65,7 +65,7 @@ router
     res.json({ Message: 'Successfully created a new item' });
   });
 router
-  .route('/users/:id/lists/:listId/items/:itemId')
+  .route('/users/:id/items/:itemId')
   .get((req, res) => {
     res.json({ Message: `Item with id: ${req.params.itemId}` });
   })
