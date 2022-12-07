@@ -1,6 +1,11 @@
 const { Router } = require('express');
 
 const router = Router();
+const userRoutes = require('./userRoutes.js');
+const listRoutes = require('./listRoutes.js');
+const itemRoutes = require('./itemRoutes.js');
+const shopRoutes = require('./shopRoutes.js');
+
 
 router
   .route('/')
@@ -8,96 +13,9 @@ router
     res.json({ API: 'ListNShop' });
   });
 
-// User Routes
-router
-  .route('/users')
-  .get((req, res) => {
-    res.json({ Message: 'list of all users' });
-  })
-  .post((req, res) => {
-    console.log(req.body);
-    res.json({ Message: 'Successfully created a new user' });
-  });
-router
-  .route('/users/:id')
-  .get((req, res) => {
-    res.json({ Message: `User with id: ${req.params.id}` });
-  })
-  .put((req, res) => {
-    console.log(req.body);
-    res.json({ Message: `Update user with id: ${req.params.id}` });
-  })
-  .delete((req, res) => {
-    res.json({ Message: `Delete user with id: ${req.params.id}` });
-  });
-
-// List Routes
-router
-  .route('/users/:id/lists')
-  .get((req, res) => {
-    res.json({ Message: `List of all lists for user with id: ${req.params.id}` });
-  })
-  .post((req, res) => {
-    console.log(req.body);
-    res.json({ Message: 'Successfully created a new list' });
-  });
-router
-  .route('/users/:id/lists/:listId')
-  .get((req, res) => {
-    res.json({ Message: `List with id: ${req.params.listId}` });
-  })
-  .put((req, res) => {
-    console.log(req.body);
-    res.json({ Message: `Update list with id: ${req.params.listId}` });
-  })
-  .delete((req, res) => {
-    res.json({ Message: `Delete list with id: ${req.params.listId}` });
-  });
-
-// Item Routes
-router
-  .route('/users/:id/items')
-  .get((req, res) => {
-    res.json({ Message: `List of all items for list with id: ${req.params.listId}` });
-  })
-  .post((req, res) => {
-    console.log(req.body);
-    res.json({ Message: 'Successfully created a new item' });
-  });
-router
-  .route('/users/:id/items/:itemId')
-  .get((req, res) => {
-    res.json({ Message: `Item with id: ${req.params.itemId}` });
-  })
-  .put((req, res) => {
-    console.log(req.body);
-    res.json({ Message: `Update item with id: ${req.params.itemId}` });
-  })
-  .delete((req, res) => {
-    res.json({ Message: `Delete item with id: ${req.params.itemId}` });
-  });
-
-// Shops Routes
-router
-  .route('/users/:id/shops')
-  .get((req, res) => {
-    res.json({ Message: `List of all shops for user with id: ${req.params.id}` });
-  })
-  .post((req, res) => {
-    console.log(req.body);
-    res.json({ Message: 'Successfully created a new shop' });
-  });
-router
-  .route('/users/:id/shops/:shopId')
-  .get((req, res) => {
-    res.json({ Message: `Shop with id: ${req.params.shopId}` });
-  })
-  .put((req, res) => {
-    console.log(req.body);
-    res.json({ Message: `Update shop with id: ${req.params.shopId}` });
-  })
-  .delete((req, res) => {
-    res.json({ Message: `Delete shop with id: ${req.params.shopId}` });
-  });
+router.use('/users', userRoutes);
+router.use('/users/:id/lists', listRoutes);
+router.use('/users/:id/items', itemRoutes);
+router.use('/users/:id/shops', shopRoutes);
 
 module.exports = router;
