@@ -1,6 +1,6 @@
 const express = require('express');
 const morgan = require('morgan');
-const router = require('./routes');
+const v1Router = require('./v1/routes');
 
 const app = express();
 
@@ -14,7 +14,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
 // Routes
-app.use('/api', router);
+app.use('/api', v1Router);
 
 // Starting the server
 app.listen(app.get('port'), () => {
