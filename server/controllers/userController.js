@@ -1,22 +1,29 @@
+const { userServices } = require('../services/userServices.js');
+
 const getAllUsers = (req, res) => {
-  res.send('Get all users');
+  const allUsers = userServices.getAllUsers();
+  res.send(allUsers);
 };
 
 const getUserById = (req, res) => {
-  res.send(`Get user ${req.params.userId}`);
+  const oneUser = userServices.getUserById(req.params.userId);
+  res.send(oneUser);
 };
 
 const createUser = (req, res) => {
+  const createUser = userServices.createUser(req.body);
   console.log(req.body);
-  res.send('Create new user');
+  res.send(createUser);
 };
 
 const updateUser = (req, res) => {
+  const updateUser = userServices.updateUser(req.params.userId, req.body);
   console.log(req.body);
-  res.send(`Update user ${req.params.userId}`);
+  res.send(updateUser);
 };
 
 const deleteUser = (req, res) => {
+  userServices.deleteUser(req.params.userId);
   res.send(`Delete user ${req.params.userId}`);
 };
 
