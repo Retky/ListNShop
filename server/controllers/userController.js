@@ -1,9 +1,23 @@
-const getAllUsers = (req, res) => {
-  res.send('Get all users');
+const { Pool } = require('pg');
+
+const pool = new Pool({
+  host: 'localhost',
+  user: 'node',
+  password: 'fox',
+  database: 'listnshop',
+  port: '5432',
+});
+
+const getAllUsers = async (req, res) => {
+  const response = await pool.query('SELECT * FROM users');
+  res.status(200).json(response.rows);
 };
 
-const getUserById = (req, res) => {
-  res.send(`Get user ${req.params.userId}`);
+const getUserById = async (req, res) => {
+  const response = await pool.query('SELECT * FROM users WHERE id = $1', [
+    req.params.userId,
+  ]);
+  res.status(200).json(response.rows);
 };
 
 const createUser = (req, res) => {
