@@ -20,9 +20,19 @@ const getUserById = async (req, res) => {
   res.status(200).json(response.rows);
 };
 
-const createUser = (req, res) => {
+const createUser = async (req, res) => {
   console.log(req.body);
-  res.send('Create new user');
+  const { name, email, password } = req.body;
+  await pool.query(
+    'INSERT INTO users (name, email, password) VALUES ($1, $2, $3)',
+    [name, email, password],
+  );
+  res.status(200).json({
+    message: 'User added successfully',
+    body: {
+      user: { name, email },
+    },
+  });
 };
 
 const updateUser = (req, res) => {
