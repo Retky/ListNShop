@@ -5,10 +5,10 @@ const userController = require('../../controllers/userController.js');
 
 // User Routes
 router
-  .get('/', userController.getAllUsers)
-  .get('/:userId', userController.getUserById)
-  .post('/', userController.createUser)
-  .put('/:userId', userController.updateUser)
-  .delete('/:userId', userController.deleteUser);
+  .get('/users', userController.getAllUsers)
+  .get('/users/:userId', userController.getUserById)
+  .post('/users', userController.createUser)
+  .put('/users/:userId', userController.updateUser)
+  .delete('/users/:userId', userController.deleteUser);
 
 module.exports = router;

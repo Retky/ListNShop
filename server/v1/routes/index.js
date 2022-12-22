@@ -12,8 +12,8 @@ router
     res.json({ API: 'ListNShop' });
   });
 
-router.use('/users', userRoutes);
-// router.use('/users/:id/lists', listRoutes);
+router.use('/', userRoutes);
+router.use('/', listRoutes);
 // router.use('/users/:id/items', itemRoutes);
 // router.use('/users/:id/shops', shopRoutes);
 

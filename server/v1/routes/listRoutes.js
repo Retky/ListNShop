@@ -1,14 +1,14 @@
-// const { Router } = require('express');
+const { Router } = require('express');
 
-// const router = Router();
-// const listController = require('../../controllers/listController.js');
+const router = Router();
+const listController = require('../../controllers/listController.js');
 
-// // List Routes
-// router
-//   .get('/', listController.getAllLists)
-//   .get('/:listId', listController.getListById)
-//   .post('/', listController.createList)
-//   .put('/:listId', listController.updateList)
-//   .delete('/:listId', listController.deleteList);
+// List Routes
+router
+  .get('/users/:userId/lists', listController.getAllLists)
+  .get('/users/:userId/lists/:listId', listController.getListById)
+  .post('/users/:userId/lists', listController.createList)
+  .put('/users/:userId/lists/:listId', listController.updateList)
+  .delete('/users/:userId/lists/:listId', listController.deleteList);
 
-// module.exports = router;
+module.exports = router;
