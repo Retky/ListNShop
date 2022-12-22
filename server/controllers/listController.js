@@ -1,5 +1,16 @@
-const getLists = (req, res) => {
-  res.send(`Get all lists for user ${req.params.userId}`);
+const { Pool } = require('pg');
+
+const pool = new Pool({
+  host: 'localhost',
+  user: 'node',
+  password: 'fox',
+  database: 'listnshop',
+  port: '5432',
+});
+
+const getAllLists = async (req, res) => {
+  const response = await pool.query('SELECT * FROM lists WHERE user_id = $1', [req.params.userId]);
+  res.status(200).json(response.rows);
 };
 
 const getListById = (req, res) => {
@@ -21,7 +32,7 @@ const deleteList = (req, res) => {
 };
 
 module.exports = {
-  getLists,
+  getAllLists,
   getListById,
   createList,
   updateList,
