@@ -50,7 +50,8 @@ const updateUser = async (req, res) => {
   });
 };
 
-const deleteUser = (req, res) => {
+const deleteUser = async (req, res) => {
+  await pool.query('DELETE FROM users WHERE id = $1', [req.params.userId]);
   res.send(`Delete user ${req.params.userId}`);
 };
 
