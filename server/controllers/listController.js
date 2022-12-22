@@ -13,8 +13,9 @@ const getAllLists = async (req, res) => {
   res.status(200).json(response.rows);
 };
 
-const getListById = (req, res) => {
-  res.send(`Get list ${req.params.listId} for user ${req.params.userId}`);
+const getListById = async (req, res) => {
+  const response = await pool.query('SELECT * FROM lists WHERE id = $1 AND user_id = $2', [req.params.listId, req.params.userId]);
+  res.status(200).json(response.rows);
 };
 
 const createList = (req, res) => {
