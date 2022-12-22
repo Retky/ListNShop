@@ -35,9 +35,19 @@ const createUser = async (req, res) => {
   });
 };
 
-const updateUser = (req, res) => {
+const updateUser = async (req, res) => {
   console.log(req.body);
-  res.send(`Update user ${req.params.userId}`);
+  const { name, email, password } = req.body;
+  await pool.query(
+    'UPDATE users SET name = $1, email = $2, password = $3 WHERE id = $4',
+    [name, email, password, req.params.userId],
+  );
+  res.status(200).json({
+    message: 'User updated successfully',
+    body: {
+      user: { name, email },
+    },
+  });
 };
 
 const deleteUser = (req, res) => {
