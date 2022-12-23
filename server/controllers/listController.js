@@ -18,9 +18,11 @@ const getListById = async (req, res) => {
   res.status(200).json(response.rows);
 };
 
-const createList = (req, res) => {
+const createList = async (req, res) => {
   console.log(req.body);
-  res.send(`Create new list for user ${req.params.userId}`);
+  const { name } = req.body;
+  await pool.query('INSERT INTO lists (name, user_id) VALUES ($1, $2)', [name, req.params.userId]);
+  res.send(`List ${name} created for user ${req.params.userId}`);
 };
 
 const updateList = (req, res) => {
