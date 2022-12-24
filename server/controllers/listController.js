@@ -25,13 +25,16 @@ const createList = async (req, res) => {
   res.send(`List ${name} created for user ${req.params.userId}`);
 };
 
-const updateList = (req, res) => {
+const updateList = async (req, res) => {
   console.log(req.body);
-  res.send(`Update list ${req.params.listId} for user ${req.params.userId}`);
+  const { name } = req.body;
+  await pool.query('UPDATE lists SET name = $1 WHERE id = $2 AND user_id = $3', [name, req.params.listId, req.params.userId]);
+  res.send(`List ${req.params.listId} updated for user ${req.params.userId}`);
 };
 
-const deleteList = (req, res) => {
-  res.send(`Delete list ${req.params.listId} for user ${req.params.userId}`);
+const deleteList = async (req, res) => {
+  await pool.query('DELETE FROM lists WHERE id = $1 AND user_id = $2', [req.params.listId, req.params.userId]);
+  res.send(`List ${req.params.listId} deleted for user ${req.params.userId}`);
 };
 
 module.exports = {
