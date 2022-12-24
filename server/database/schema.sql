@@ -10,4 +10,17 @@ CREATE TABLE users (
 
 INSERT INTO users (name, email, password) VALUES
   ('Tester', 'test@test.com', 'testpassword'),
-  ('Tester2', 'tester2@test.com', '123456');
+  ('Test2', 'tester2@test.com', '123456');
+
+CREATE TABLE lists (
+  id SERIAL NOT NULL,
+  name VARCHAR(30) NOT NULL,
+  user_id INTEGER NOT NULL,
+  PRIMARY KEY (id),
+  FOREIGN KEY (user_id) REFERENCES users(id)
+);
+
+INSERT INTO lists (name, user_id) VALUES
+  ('Test List', 1),
+  ('Test List 2', 1),
+  ('Test List 3', 2);
