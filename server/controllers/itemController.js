@@ -18,9 +18,11 @@ const getItemById = async (req, res) => {
   res.status(200).json(response.rows);
 };
 
-const createItem = (req, res) => {
+const createItem = async (req, res) => {
   console.log(req.body);
-  res.send('Create new item');
+  const { name } = req.body;
+  await pool.query('INSERT INTO items (name, user_id) VALUES ($1, $2)', [name, req.params.userId]);
+  res.send(`Item ${name} created for user ${req.params.userId}`);
 };
 
 const updateItem = (req, res) => {
