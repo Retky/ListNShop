@@ -1,9 +1,21 @@
-const getAllItems = (req, res) => {
-  res.send('Get all items');
+const { Pool } = require('pg');
+
+const pool = new Pool({
+  host: 'localhost',
+  user: 'node',
+  password: 'fox',
+  database: 'listnshop',
+  port: '5432',
+});
+
+const getAllItems = async (req, res) => {
+  const response = await pool.query('SELECT * FROM items WHERE user_id = $1', [req.params.userId]);
+  res.status(200).json(response.rows);
 };
 
-const getItemById = (req, res) => {
-  res.send(`Get item ${req.params.itemId}`);
+const getItemById = async (req, res) => {
+  const response = await pool.query('SELECT * FROM items WHERE id = $1 AND user_id = $2', [req.params.itemId, req.params.userId]);
+  res.status(200).json(response.rows);
 };
 
 const createItem = (req, res) => {
