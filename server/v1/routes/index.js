@@ -4,6 +4,7 @@ const router = Router();
 const userRoutes = require('./userRoutes.js');
 const listRoutes = require('./listRoutes.js');
 const itemRoutes = require('./itemRoutes.js');
+const listItemsRoutes = require('./listItemsRoutes.js');
 const shopRoutes = require('./shopRoutes.js');
 
 router
@@ -15,6 +16,7 @@ router
 router.use('/', userRoutes);
 router.use('/', listRoutes);
 router.use('/', itemRoutes);
+router.use('/', listItemsRoutes);
 // router.use('/users/:id/shops', shopRoutes);
 
 module.exports = router;
