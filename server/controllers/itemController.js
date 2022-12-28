@@ -25,9 +25,11 @@ const createItem = async (req, res) => {
   res.send(`Item ${name} created for user ${req.params.userId}`);
 };
 
-const updateItem = (req, res) => {
+const updateItem = async (req, res) => {
   console.log(req.body);
-  res.send(`Update item ${req.params.itemId}`);
+  const { name } = req.body;
+  await pool.query('UPDATE items SET name = $1 WHERE id = $2 AND user_id = $3', [name, req.params.itemId, req.params.userId]);
+  res.send(`Item ${req.params.itemId} updated for user ${req.params.userId}`);
 };
 
 const deleteItem = (req, res) => {
