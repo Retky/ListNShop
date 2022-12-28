@@ -24,3 +24,28 @@ INSERT INTO lists (name, user_id) VALUES
   ('Test List', 1),
   ('Test List 2', 1),
   ('Test List 3', 2);
+
+CREATE TABLE items (
+  id SERIAL NOT NULL,
+  name VARCHAR(30) NOT NULL,
+  user_id INTEGER NOT NULL,
+  PRIMARY KEY (id),
+  FOREIGN KEY (user_id) REFERENCES users(id)
+);
+
+INSERT INTO items (name, user_id) VALUES
+  ('Test Item', 1),
+  ('Test Item 2', 1),
+  ('Test Item 3', 2);
+
+CREATE TABLE list_items (
+  id SERIAL NOT NULL,
+  list_id INTEGER NOT NULL,
+  item_id INTEGER NOT NULL,
+  checked BOOLEAN NOT NULL,
+  quantity INTEGER NOT NULL,
+  unit VARCHAR(10) NOT NULL,
+  PRIMARY KEY (id),
+  FOREIGN KEY (list_id) REFERENCES lists(id),
+  FOREIGN KEY (item_id) REFERENCES items(id)
+);
