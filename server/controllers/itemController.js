@@ -32,8 +32,9 @@ const updateItem = async (req, res) => {
   res.send(`Item ${req.params.itemId} updated for user ${req.params.userId}`);
 };
 
-const deleteItem = (req, res) => {
-  res.send(`Delete item ${req.params.itemId}`);
+const deleteItem = async (req, res) => {
+  await pool.query('DELETE FROM items WHERE id = $1 AND user_id = $2', [req.params.itemId, req.params.userId]);
+  res.send(`Item ${req.params.itemId} deleted for user ${req.params.userId}`);
 };
 
 module.exports = {
