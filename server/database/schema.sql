@@ -49,3 +49,11 @@ CREATE TABLE list_items (
   FOREIGN KEY (list_id) REFERENCES lists(id),
   FOREIGN KEY (item_id) REFERENCES items(id)
 );
+
+INSERT INTO list_items (list_id, item_id, checked, quantity, unit) VALUES
+  (1, 1, false, 1, 'each'),
+  (1, 2, false, 1, 'each'),
+  (2, 1, false, 1, 'each'),
+  (2, 2, false, 1, 'each'),
+  (3, 1, false, 1, 'each'),
+  (3, 2, false, 1, 'each');
