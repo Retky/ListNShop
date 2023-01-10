@@ -20,6 +20,18 @@ const getListItemById = async (req, res) => {
   res.status(200).json(response.rows);
 };
 
+const createListItem = async (req, res) => {
+  const { listId } = req.params;
+  const { itemId, checked, quantity, unit } = req.body;
+  await pool.query('INSERT INTO list_items (list_id, item_id, checked, quantity, unit) VALUES ($1, $2, $3, $4, $5)', [listId, itemId, checked, quantity, unit]);
+  res.status(200).json({
+    message: 'List item added successfully',
+    body: {
+      list_item: { listId, itemId, checked, quantity, unit },
+    },
+  });
+};
+
 module.exports = {
   getAllListItems,
   getListItemById,
