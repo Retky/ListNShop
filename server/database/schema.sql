@@ -70,3 +70,21 @@ INSERT INTO shops (name, user_id) VALUES
   ('Test Shop', 1),
   ('Test Shop 2', 1),
   ('Test Shop 3', 2);
+
+CREATE TABLE prices (
+  id SERIAL NOT NULL,
+  shop_id INTEGER NOT NULL,
+  item_id INTEGER NOT NULL,
+  price DECIMAL NOT NULL,
+  PRIMARY KEY (id),
+  FOREIGN KEY (shop_id) REFERENCES shops(id),
+  FOREIGN KEY (item_id) REFERENCES items(id)
+);
+
+INSERT INTO prices (shop_id, item_id, price) VALUES
+  (1, 1, 1.50),
+  (1, 2, 2.99),
+  (2, 1, 1.80),
+  (2, 2, 2.00),
+  (3, 1, 1.78),
+  (3, 2, 3.00);
