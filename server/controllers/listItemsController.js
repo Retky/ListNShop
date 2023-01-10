@@ -44,6 +44,17 @@ const updateListItem = async (req, res) => {
   });
 };
 
+const deleteListItem = async (req, res) => {
+  const { itemId } = req.params;
+  await pool.query('DELETE FROM list_items WHERE item_id = $1', [itemId]);
+  res.status(200).json({
+    message: 'List item deleted successfully',
+    body: {
+      list_item: { itemId },
+    },
+  });
+};
+
 module.exports = {
   getAllListItems,
   getListItemById,
