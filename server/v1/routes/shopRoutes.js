@@ -5,10 +5,10 @@ const shopController = require('../../controllers/shopController.js');
 
 // Shops Routes
 router
-  .get('/', shopController.getAllShops)
-  .get('/:shopId', shopController.getShopById)
-  .post('/', shopController.createShop)
-  .put('/:shopId', shopController.updateShop)
-  .delete('/:shopId', shopController.deleteShop);
+  .get('/users/:userId/shops', shopController.getAllShops)
+  .get('/users/:userId/shops/:shopId', shopController.getShopById)
+  .post('/users/:userId/shops', shopController.createShop)
+  .put('/users/:userId/shops/:shopId', shopController.updateShop)
+  .delete('/users/:userId/shops/:shopId', shopController.deleteShop);
 
 module.exports = router;

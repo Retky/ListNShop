@@ -17,6 +17,6 @@ router.use('/', userRoutes);
 router.use('/', listRoutes);
 router.use('/', itemRoutes);
 router.use('/', listItemsRoutes);
-// router.use('/users/:id/shops', shopRoutes);
+router.use('/', shopRoutes);
 
 module.exports = router;
