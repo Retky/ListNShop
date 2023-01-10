@@ -1,6 +1,6 @@
 const express = require('express');
 const morgan = require('morgan');
-const v1Router = require('./v1/routes');
+const v1Router = require('./v1/routes/index.js');
 
 const app = express();
 
@@ -18,5 +18,5 @@ app.use('/v1/api', v1Router);
 
 // Starting the server
 app.listen(app.get('port'), () => {
-  console.log(`Server on port ${app.get('port')}`);
+  console.log(`Server on port ${app.get('port')}`); // eslint-disable-line no-console
 });

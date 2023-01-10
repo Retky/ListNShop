@@ -19,14 +19,12 @@ const getShopById = async (req, res) => {
 };
 
 const createShop = async (req, res) => {
-  console.log(req.body);
   const { name } = req.body;
   await pool.query('INSERT INTO shops (name, user_id) VALUES ($1, $2)', [name, req.params.userId]);
   res.send(`Shop ${name} created for user ${req.params.userId}`);
 };
 
 const updateShop = async (req, res) => {
-  console.log(req.body);
   const { name } = req.body;
   await pool.query('UPDATE shops SET name = $1 WHERE id = $2 AND user_id = $3', [name, req.params.shopId, req.params.userId]);
   res.send(`Shop ${req.params.shopId} updated for user ${req.params.userId}`);

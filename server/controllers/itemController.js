@@ -19,14 +19,12 @@ const getItemById = async (req, res) => {
 };
 
 const createItem = async (req, res) => {
-  console.log(req.body);
   const { name } = req.body;
   await pool.query('INSERT INTO items (name, user_id) VALUES ($1, $2)', [name, req.params.userId]);
   res.send(`Item ${name} created for user ${req.params.userId}`);
 };
 
 const updateItem = async (req, res) => {
-  console.log(req.body);
   const { name } = req.body;
   await pool.query('UPDATE items SET name = $1 WHERE id = $2 AND user_id = $3', [name, req.params.itemId, req.params.userId]);
   res.send(`Item ${req.params.itemId} updated for user ${req.params.userId}`);

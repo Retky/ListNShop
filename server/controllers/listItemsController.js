@@ -22,24 +22,32 @@ const getListItemById = async (req, res) => {
 
 const createListItem = async (req, res) => {
   const { listId } = req.params;
-  const { itemId, checked, quantity, unit } = req.body;
+  const {
+    itemId, checked, quantity, unit,
+  } = req.body;
   await pool.query('INSERT INTO list_items (list_id, item_id, checked, quantity, unit) VALUES ($1, $2, $3, $4, $5)', [listId, itemId, checked, quantity, unit]);
   res.status(200).json({
     message: 'List item added successfully',
     body: {
-      list_item: { listId, itemId, checked, quantity, unit },
+      list_item: {
+        listId, itemId, checked, quantity, unit,
+      },
     },
   });
 };
 
 const updateListItem = async (req, res) => {
   const { itemId } = req.params;
-  const { listId, checked, quantity, unit } = req.body;
+  const {
+    listId, checked, quantity, unit,
+  } = req.body;
   await pool.query('UPDATE list_items SET list_id = $1, checked = $2, quantity = $3, unit = $4 WHERE item_id = $5', [listId, checked, quantity, unit, itemId]);
   res.status(200).json({
     message: 'List item updated successfully',
     body: {
-      list_item: { listId, itemId, checked, quantity, unit },
+      list_item: {
+        listId, itemId, checked, quantity, unit,
+      },
     },
   });
 };

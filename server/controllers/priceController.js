@@ -23,20 +23,20 @@ const getPriceById = async (req, res) => {
 const createPrice = async (req, res) => {
   const { itemId } = req.params;
   const { price } = req.body;
-  const response = await pool.query('INSERT INTO prices (item_id, price, date) VALUES ($1, $2)', [itemId, price]);
+  await pool.query('INSERT INTO prices (item_id, price, date) VALUES ($1, $2)', [itemId, price]);
   res.status(200).json({ message: 'Price added successfully' });
 };
 
 const updatePrice = async (req, res) => {
   const { priceId } = req.params;
   const { price } = req.body;
-  const response = await pool.query('UPDATE prices SET price = $1 WHERE id = $2', [price, priceId]);
+  await pool.query('UPDATE prices SET price = $1 WHERE id = $2', [price, priceId]);
   res.status(200).json({ message: 'Price updated successfully' });
 };
 
 const deletePrice = async (req, res) => {
   const { priceId } = req.params;
-  const response = await pool.query('DELETE FROM prices WHERE id = $1', [priceId]);
+  await pool.query('DELETE FROM prices WHERE id = $1', [priceId]);
   res.status(200).json({ message: 'Price deleted successfully' });
 };
 

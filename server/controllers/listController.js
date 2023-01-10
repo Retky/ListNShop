@@ -19,14 +19,12 @@ const getListById = async (req, res) => {
 };
 
 const createList = async (req, res) => {
-  console.log(req.body);
   const { name } = req.body;
   await pool.query('INSERT INTO lists (name, user_id) VALUES ($1, $2)', [name, req.params.userId]);
   res.send(`List ${name} created for user ${req.params.userId}`);
 };
 
 const updateList = async (req, res) => {
-  console.log(req.body);
   const { name } = req.body;
   await pool.query('UPDATE lists SET name = $1 WHERE id = $2 AND user_id = $3', [name, req.params.listId, req.params.userId]);
   res.send(`List ${req.params.listId} updated for user ${req.params.userId}`);

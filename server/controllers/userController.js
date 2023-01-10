@@ -21,7 +21,6 @@ const getUserById = async (req, res) => {
 };
 
 const createUser = async (req, res) => {
-  console.log(req.body);
   const { name, email, password } = req.body;
   await pool.query(
     'INSERT INTO users (name, email, password) VALUES ($1, $2, $3)',
@@ -36,7 +35,6 @@ const createUser = async (req, res) => {
 };
 
 const updateUser = async (req, res) => {
-  console.log(req.body);
   const { name, email, password } = req.body;
   await pool.query(
     'UPDATE users SET name = $1, email = $2, password = $3 WHERE id = $4',
