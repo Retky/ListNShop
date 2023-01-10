@@ -57,3 +57,16 @@ INSERT INTO list_items (list_id, item_id, checked, quantity, unit) VALUES
   (2, 2, false, 1, 'each'),
   (3, 1, false, 1, 'each'),
   (3, 2, false, 1, 'each');
+
+CREATE TABLE shops (
+  id SERIAL NOT NULL,
+  name VARCHAR(30) NOT NULL,
+  user_id INTEGER NOT NULL,
+  PRIMARY KEY (id),
+  FOREIGN KEY (user_id) REFERENCES users(id)
+);
+
+INSERT INTO shops (name, user_id) VALUES
+  ('Test Shop', 1),
+  ('Test Shop 2', 1),
+  ('Test Shop 3', 2);
