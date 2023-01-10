@@ -1,4 +1,4 @@
-const getShops = (req, res) => {
+const getAllShops = (req, res) => {
   res.send(`Get all shops for user ${req.params.userId}`);
 };
 
@@ -21,7 +21,7 @@ const deleteShop = (req, res) => {
 };
 
 module.exports = {
-  getShops,
+  getAllShops,
   getShopById,
   createShop,
   updateShop,
