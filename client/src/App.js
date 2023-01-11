@@ -1,11 +1,9 @@
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      Hello
-    </div>
-  );
-}
+const App = () => (
+  <section>
+    <h1>Shopping List</h1>
+  </section>
+);
 
 export default App;
