@@ -1,0 +1,15 @@
+@import './base.scss';
+
+.shoppingList {
+  li {
+    &:nth-child(odd) {
+      background-color: $primary-color;
+    }
+    &:nth-child(even) {
+      background-color: $secondary-color;
+    }
+    &:first-child {
+      padding-top: 31px;
+    }
+  }
+}

@@ -1,7 +1,7 @@
 import './header.scss';
 
 const header = () => {
-  return (
+  const header = (
     <header>
       <nav />
       <div className="logo">
@@ -10,6 +10,8 @@ const header = () => {
       <div className="user" />
     </header>
   );
+
+  return header;
 };
 
 export default header;
