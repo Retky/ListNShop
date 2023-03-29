@@ -1,9 +1,12 @@
+import ListBar from '../components/listBar';
+
 const home = () => {
-  return (
+  const page = (
     <div>
-      <h2>Home</h2>
+      <ListBar title="Quick List" />
     </div>
-  );
+  )
+  return page;
 }
 
 export default home;
