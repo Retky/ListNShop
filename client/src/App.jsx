@@ -1,10 +1,17 @@
 import './App.scss';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Header from './components/header';
+import Home from './pages/home';
 
-function App() {
+const App = () => {
   return (
     <div className="App">
-      <Header />
+      <Router>
+        <Header />
+        <Routes>
+          {/* <Route path="/" element={<Home />} /> */}
+        </Routes>
+      </Router>
     </div>
   );
 }
