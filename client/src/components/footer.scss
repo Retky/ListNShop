@@ -1,0 +1,33 @@
+@import './base.scss';
+
+.footer {
+  background-color: $primary-color;
+  width: 100%;
+  height: 80px;
+  box-sizing: border-box;
+  padding: 0 20px;
+  border-radius: 20px 20px 0 0;
+  display: flex;
+  position: fixed;
+  bottom: 0;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 8;
+
+  .button {
+    display: flex;
+    @include box-button($button-color);
+  }
+
+  .addBtn {
+    position: absolute;
+    left: 50%;
+    top: -25px;
+    transform: translateX(-50%);
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    background-color: $accent-color;
+  }
+}
