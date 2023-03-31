@@ -1,11 +1,12 @@
 import { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+
+import { fetchLocalLists } from '../redux/lists/lists';
+
 import TitleBar from '../components/titleBar';
 import List from '../components/list';
 import BestTotal from '../components/bestTotal';
 import Footer from '../components/footer';
-import { useSelector, useDispatch } from 'react-redux';
-
-import { fetchLocalLists } from '../redux/lists/lists';
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -18,7 +19,7 @@ const Home = () => {
   const page = (
     <div>
       <TitleBar title={quickList ? quickList.name : 'New List'} />
-      <List />
+      <List id={quickList ? quickList.id : 0} />
       <BestTotal />
       <Footer />
     </div>
