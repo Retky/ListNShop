@@ -1,8 +1,9 @@
 import { configureStore, combineReducers } from '@reduxjs/toolkit';
+import lists from './lists/lists';
 
 const store = configureStore({
   reducer: combineReducers({
-    // Add reducers here
+    lists,
   }),
 });
 
