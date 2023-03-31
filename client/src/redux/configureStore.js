@@ -1,5 +1,5 @@
 import { configureStore, combineReducers } from '@reduxjs/toolkit';
-import lists from './lists/lists';
+import lists from './lists';
 
 const store = configureStore({
   reducer: combineReducers({

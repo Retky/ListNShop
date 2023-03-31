@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { fetchLocalLists } from '../redux/lists/lists';
+import { fetchLocalLists } from '../redux/lists';
 
 import TitleBar from '../components/titleBar';
 import List from '../components/list';
