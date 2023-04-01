@@ -1,11 +1,24 @@
+import { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+
+import { fetchLocalStores } from '../redux/stores';
+
+import Columns from './columns';
 import './list.scss';
 
-const list = (props) => {
+const List = (props) => {
   const { id } = props;
+
+  const dispatch = useDispatch();
+  const stores = useSelector((store) => store.stores);
+
+  useEffect(() => {
+    dispatch(fetchLocalStores()); // eslint-disable-next-line
+  }, []);
 
   const list = (
     <ul className="shoppingList">
-      <li>Item</li>
+      <Columns stores={stores} />
 
       <li>Item 1</li>
       <li>Item 2</li>
@@ -16,4 +29,4 @@ const list = (props) => {
   return list;
 };
 
-export default list;
+export default List;
