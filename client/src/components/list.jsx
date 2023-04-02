@@ -24,7 +24,7 @@ const List = (props) => {
     <ul className="shoppingList">
       <Columns key={`titles`} shops={shops} />
       {listItems.map((item) => (
-        <Item key={`item-${item.id}`} item={item} />
+        <Item key={`item-${item.id}`} item={item} shops={shops} />
       ))}
 
       <li>Total:</li>
