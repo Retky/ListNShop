@@ -20,8 +20,6 @@ const List = (props) => {
     dispatch(fetchLocalListItems(id)); // eslint-disable-next-line
   }, [id]);
 
-  console.log('shops', shops);
-
   const list = (
     <ul className="shoppingList">
       <Columns key={`titles`} shops={shops} />

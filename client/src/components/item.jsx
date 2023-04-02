@@ -3,12 +3,7 @@ const List = (props) => {
 
   const itemRow = (
     <li className="row">
-      <div className="itemCol">{item.item}</div>
-      {item.prices.map((price) => (
-        <div className="priceCol">
-          {price.price}
-        </div>
-      ))}
+      <div className="itemCol">{item.item.name}</div>
     </li>
   );
 
