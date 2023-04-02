@@ -1,27 +1,33 @@
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { fetchLocalStores } from '../redux/stores';
+import { fetchLocalSHOPS } from '../redux/shops';
+import { fetchLocalListItems } from '../redux/listItems';
 
 import Columns from './columns';
+import Item from './item';
 import './list.scss';
 
 const List = (props) => {
   const { id } = props;
 
   const dispatch = useDispatch();
-  const stores = useSelector((store) => store.stores);
+  const shops = useSelector((store) => store.shops);
+  const listItems = useSelector((store) => store.listItems);
 
   useEffect(() => {
-    dispatch(fetchLocalStores()); // eslint-disable-next-line
-  }, []);
+    dispatch(fetchLocalSHOPS());
+    dispatch(fetchLocalListItems(id)); // eslint-disable-next-line
+  }, [id]);
+
+  console.log('shops', shops);
 
   const list = (
     <ul className="shoppingList">
-      <Columns stores={stores} />
-
-      <li>Item 1</li>
-      <li>Item 2</li>
+      <Columns key={`titles`} shops={shops} />
+      {listItems.map((item) => (
+        <Item key={`item-${item.id}`} item={item} />
+      ))}
 
       <li>Total:</li>
     </ul>

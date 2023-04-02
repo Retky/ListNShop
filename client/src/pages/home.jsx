@@ -10,7 +10,7 @@ import Footer from '../components/footer';
 
 const Home = () => {
   const dispatch = useDispatch();
-  const quickList = useSelector((store) => store.lists[0]);
+  const quickList = useSelector((store) => store.lists[store.lists.length-1]);
 
   useEffect(() => {
     dispatch(fetchLocalLists()); // eslint-disable-next-line

@@ -3,7 +3,6 @@ const FETCH_LOCAL_LIST_ITEMS = 'FETCH_LOCAL_LIST_ITEMS';
 const initialState = [];
 
 export const fetchLocalListItems = (listId) => {
-  console.log(listId);
   const listItems = JSON.parse(localStorage.getItem('items')) || initialState;
   const filteredListItems = listItems.filter((item) => item.list_id === listId);
   return {
