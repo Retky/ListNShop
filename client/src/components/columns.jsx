@@ -8,9 +8,11 @@ const Columns = (props) => {
   const columns = (
     <li className="row">
       <div className='itemCol titles'>Item</div>
-      {[...defaultStore, ...shops].map((store) => (
-          <div className='shopCol titles'>{store.name}</div>
-      ))}
+      <div className='shopCol titles'>
+        {[...defaultStore, ...shops].map((store) => (
+            <div>{store.name}</div>
+        ))}
+      </div>
     </li>
   );
 

@@ -6,13 +6,19 @@
 }
 
 .itemCol {
-  flex-grow: 2;
+  width: 40%;
 }
 
 .shopCol {
   background-color: $secondary-grey;
   flex-grow: 1;
-  border-left: 1px solid #aaa;
+  display: flex;
+  justify-content: space-between;
+
+  div {
+    width: 100%;
+    text-align: center;
+  }
 }
 
 .titles {
