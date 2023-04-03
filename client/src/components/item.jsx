@@ -8,15 +8,22 @@ const List = (props) => {
     <li className="row">
       <div className="itemCol">{item.item.name}</div>
       <div className="shopCol">
-        {shops.map((shop) => (
-          <div key={`shop-${shop.id}`}>
-            {
-              (item.prices.find((price) => price.item_id === item.item.id && price.shop_id === shop.id)) ? (
-                item.prices.find((price) => price.item_id === item.item.id && price.shop_id === shop.id).price
-              ) : (  '' )
-            }
-          </div>
-        ))}
+        {shops.map((shop) => {
+            let price = (item.prices.find((price) => price.item_id === item.item.id && price.shop_id === shop.id)) ? (
+              item.prices.find((price) => price.item_id === item.item.id && price.shop_id === shop.id).price
+            ) : (  '' )
+            let totalPrice = price * item.quantity
+          return (
+            <div key={`shop-${shop.id}`}>
+              <div key={`price-${shop.id}`}>
+                {price ? `$${price}` : '-'}
+              </div>
+              <div key={`tPrice-${shop.id}`}>
+                {totalPrice ? `$${totalPrice}` : '-'}
+              </div>
+            </div>
+          )
+        })}
       </div>
     </li>
   );
