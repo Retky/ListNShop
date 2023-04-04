@@ -1,6 +1,6 @@
 @import './base.scss';
 
-.bestTotal {
+.bestBar {
   background-color: $secondary-grey;
   padding: 5px;
   border-radius: 0 0 25px 25px;
@@ -11,7 +11,7 @@
   left: 50%;
   transform: translateX(-50%);
 
-  .total {
+  .bestTotal {
     font-size: 16px;
     color: #fff;
     text-align: center;

@@ -6,11 +6,11 @@ const Columns = (props) => {
   const defaultStore = shops.length ? [] : [{ name: 'Default' }];
 
   const columns = (
-    <li key={'titles'} className="row">
-      <div key={'titleItem'} className='itemCol titles'>Item</div>
-      <div key={'titleShops'} className='shopCol titles'>
-        {[...defaultStore, ...shops].map((store) => (
-            <div key={`store-${store.id}`}>{store.name}</div>
+    <li className="row">
+      <div className='itemCol titles'>Item</div>
+      <div className='shopCol titles'>
+        {[...defaultStore, ...shops].map((shop) => (
+            <div key={`shop-${shop.id}`} className='prices'>{shop.name}</div>
         ))}
       </div>
     </li>

@@ -7,7 +7,7 @@ const header = () => {
       <div className="logo">
         <h1>list N shop</h1>
       </div>
-      <div className="user" />
+      <div className="userBtn" />
     </header>
   );
 

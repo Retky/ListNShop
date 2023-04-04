@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useMemo } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { fetchLocalSHOPS } from '../redux/shops';
@@ -17,19 +17,38 @@ const List = (props) => {
 
   useEffect(() => {
     dispatch(fetchLocalSHOPS());
-    dispatch(fetchLocalListItems(id)); // eslint-disable-next-line
-  }, [id]);
+    dispatch(fetchLocalListItems(id));
+  }, [dispatch, id]);
+
+  const totals = useMemo(() => {
+    const sums = {};
+    listItems.forEach((item) => {
+      shops.forEach((shop) => {
+        const priceObj = item.prices.find((price) => price.item_id === item.item.id && price.shop_id === shop.id);
+        const price = priceObj ? priceObj.price : 0;
+        const totalPrice = price * item.quantity;
+        sums[shop.id] = (sums[shop.id] || 0) + totalPrice;
+      });
+    });
+    return sums;
+  }, [listItems, shops]);
 
   const list = (
     <ul className="shoppingList">
-      <Columns key={`titles`} shops={shops} />
-      {listItems.map((item) => (
-        <Item key={`item-${item.id}`} item={item} shops={shops} />
+      <Columns shops={shops} />
+      {listItems.map((item, index) => (
+        <Item key={`item-${item.id}`} item={item} shops={shops} bg={index % 2 === 0 ? 'lightRow' : 'darkRow'} />
       ))}
-
-      <li>Total:</li>
+      {/* TODO: Put this in a component */}
+      <li className='row'>Total: {shops.map((shop) => (
+        <div key={`shop-${shop.id}`} className="prices">
+          <div>
+            {totals[shop.id] ? `$${totals[shop.id]}` : '-'}
+          </div>
+        </div>
+      ))}</li>
     </ul>
-  )
+  );
   return list;
 };
 
