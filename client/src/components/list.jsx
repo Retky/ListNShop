@@ -1,7 +1,7 @@
 import { useEffect, useMemo } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { fetchLocalSHOPS } from '../redux/shops';
+import { fetchLocalShops } from '../redux/shops';
 import { fetchLocalListItems } from '../redux/listItems';
 
 import Columns from './columns';
@@ -16,7 +16,7 @@ const List = (props) => {
   const listItems = useSelector((store) => store.listItems);
 
   useEffect(() => {
-    dispatch(fetchLocalSHOPS());
+    dispatch(fetchLocalShops());
     dispatch(fetchLocalListItems(id));
   }, [dispatch, id]);
 

@@ -2,7 +2,7 @@ const FETCH_LOCAL_SHOPS = 'FETCH_LOCAL_SHOPS';
 
 const initialState = [];
 
-export const fetchLocalSHOPS = () => {
+export const fetchLocalShops = () => {
   const shops = JSON.parse(localStorage.getItem('shops')) || initialState;
   return {
     type: FETCH_LOCAL_SHOPS,
