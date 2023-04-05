@@ -4,13 +4,13 @@ import { useSelector, useDispatch } from 'react-redux';
 import { fetchLocalShops } from '../redux/shops';
 import { fetchLocalListItems } from '../redux/listItems';
 
-import Columns from './columns';
-import Item from './item';
+import ColumnsRow from './ColumnsRow';
+import ItemRow from './ItemRow';
 import './list.scss';
 
 const List = (props) => {
   const { id } = props;
-  const totals = {};
+  const [totals, setTotals] = React.useState({});
 
   const dispatch = useDispatch();
   const shops = useSelector((store) => store.shops);
@@ -21,19 +21,25 @@ const List = (props) => {
     dispatch(fetchLocalListItems(id));
   }, [dispatch, id]);
 
-  const setTotal = (shopId, total) => {
-    if (totals[shopId]) {
-      totals[shopId] += total;
-    } else {
-      totals[shopId] = total;
-    }
-  };
+  useEffect(() => {
+    let totals = {};
+    listItems.forEach((item) => {
+      item.prices.forEach((price) => {
+        if (totals[price.shop_id]) {
+          totals[price.shop_id] += price.price * item.quantity;
+        } else {
+          totals[price.shop_id] = price.price * item.quantity;
+        }
+      });
+    });
+    setTotals(totals);
+  }, [listItems]);
 
   const list = (
     <ul className="shoppingList">
-      <Columns shops={shops} />
+      <ColumnsRow shops={shops} />
       {listItems.map((item, index) => (
-        <Item key={`item-${item.id}`} item={item} shops={shops} bg={index % 2 === 0 ? 'lightRow' : 'darkRow'} setTotal={setTotal} />
+        <ItemRow key={`item-${item.id}`} item={item} shops={shops} bg={index % 2 === 0 ? 'lightRow' : 'darkRow'} />
       ))}
       {/* TODO: Put this in a component */}
       <li className='row'>Total: {shops.map((shop) => (
