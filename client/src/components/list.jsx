@@ -21,22 +21,19 @@ const List = (props) => {
     dispatch(fetchLocalListItems(id));
   }, [dispatch, id]);
 
-  const sumTotal = (shopId, total) => {
+  const setTotal = (shopId, total) => {
     if (totals[shopId]) {
-      // console.log('sumTotal', shopId, total);
       totals[shopId] += total;
     } else {
-      // console.log('createTotal', shopId, total);
       totals[shopId] = total;
     }
-    console.log('totals', totals);
   };
 
   const list = (
     <ul className="shoppingList">
       <Columns shops={shops} />
       {listItems.map((item, index) => (
-        <Item key={`item-${item.id}`} item={item} shops={shops} bg={index % 2 === 0 ? 'lightRow' : 'darkRow'} setTotal={sumTotal} />
+        <Item key={`item-${item.id}`} item={item} shops={shops} bg={index % 2 === 0 ? 'lightRow' : 'darkRow'} setTotal={setTotal} />
       ))}
       {/* TODO: Put this in a component */}
       <li className='row'>Total: {shops.map((shop) => (
