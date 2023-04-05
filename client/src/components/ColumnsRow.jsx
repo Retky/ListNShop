@@ -10,7 +10,7 @@ const Columns = (props) => {
       <div className='itemCol titles'>Item</div>
       <div className='shopCol titles'>
         {[...defaultStore, ...shops].map((shop) => (
-            <div key={`shop-${shop.id}`} className='prices'>{shop.name}</div>
+            <div key={`shop-${shop.id}`} className='price'>{shop.name}</div>
         ))}
       </div>
     </li>

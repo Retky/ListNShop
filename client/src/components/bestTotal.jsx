@@ -1,6 +1,6 @@
 import "./bestTotal.scss";
 
-const finalTotal = (props) => {
+const FinalTotal = (props) => {
   const { bestTotal } = props;
 
   const finalTotal = (
@@ -12,4 +12,4 @@ const finalTotal = (props) => {
   return finalTotal;
 };
 
-export default finalTotal;
+export default FinalTotal;

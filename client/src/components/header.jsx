@@ -1,6 +1,6 @@
 import './header.scss';
 
-const header = () => {
+const Header = () => {
   const header = (
     <header>
       <nav />
@@ -14,4 +14,4 @@ const header = () => {
   return header;
 };
 
-export default header;
+export default Header;

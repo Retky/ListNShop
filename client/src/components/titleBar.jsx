@@ -1,6 +1,6 @@
 import "./titleBar.scss";
 
-const titleBar = (props) => {
+const TitleBar = (props) => {
   const { title } = props;
 
   const titleBar = (
@@ -12,4 +12,4 @@ const titleBar = (props) => {
   return titleBar;
 };
 
-export default titleBar;
+export default TitleBar;

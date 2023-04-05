@@ -12,6 +12,12 @@
   align-items: center;
 }
 
+.totalRow {
+  box-sizing: border-box;
+  padding-right: 10px;
+  justify-content: end;
+}
+
 .shopCol {
   background-color: $secondary-grey;
   flex-grow: 1;
@@ -19,23 +25,8 @@
   justify-content: space-between;
 }
 
-.prices {
-  width: 100%;
-  text-align: center;
-  font-size: 15px;
-  border-left: #e0e0e0 2px groove;
-}
-
 .titles {
   padding-top: 31px;
-}
-
-.lightRow {
-  background-color: $primary-grey;
-}
-
-.darkROw {
-  background-color: $secondary-grey;
 }
 
 .totalPrice {

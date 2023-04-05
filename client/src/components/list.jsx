@@ -4,8 +4,9 @@ import { useSelector, useDispatch } from 'react-redux';
 import { fetchLocalShops } from '../redux/shops';
 import { fetchLocalListItems } from '../redux/listItems';
 
-import ColumnsRow from './ColumnsRow';
-import ItemRow from './ItemRow';
+import ColumnsRow from './columnsRow';
+import ItemRow from './itemRow';
+import TotalRow from './totalRow';
 import './list.scss';
 
 const List = (props) => {
@@ -39,16 +40,9 @@ const List = (props) => {
     <ul className="shoppingList">
       <ColumnsRow shops={shops} />
       {listItems.map((item, index) => (
-        <ItemRow key={`item-${item.id}`} item={item} shops={shops} bg={index % 2 === 0 ? 'lightRow' : 'darkRow'} />
+        <ItemRow key={`item-${item.id}`} item={item} shops={shops} />
       ))}
-      {/* TODO: Put this in a component */}
-      <li className='row'>Total: {shops.map((shop) => (
-        <div key={`shop-${shop.id}`} className="prices">
-          <div>
-            {totals[shop.id] ? `$${totals[shop.id]}` : '-'}
-          </div>
-        </div>
-      ))}</li>
+      <TotalRow shops={shops} totals={totals} />
     </ul>
   );
 
