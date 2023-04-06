@@ -1,3 +1,5 @@
+import Item from './item.jsx';
+
 import './items.scss';
 
 const ItemRow = (props) => {
@@ -5,7 +7,9 @@ const ItemRow = (props) => {
 
   const row = (
     <li className="row">
-      <div className="itemCol" >{item.item.name}</div>
+      <div className="itemCol" >
+        <Item item={item} />
+      </div>
       <div className={'shopCol'}>
         {shops.map((shop) => {
           let price = item.prices.find((price) => price.item_id === item.item.id && price.shop_id === shop.id)?.price || 0;
