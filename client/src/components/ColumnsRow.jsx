@@ -1,4 +1,4 @@
-import './items.scss'
+import './rows.scss'
 
 const Columns = (props) => {
   const { shops } = props;

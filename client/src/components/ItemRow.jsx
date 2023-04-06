@@ -1,6 +1,6 @@
 import Item from './item.jsx';
 
-import './items.scss';
+import './rows.scss';
 
 const ItemRow = (props) => {
   const { item, shops } = props;

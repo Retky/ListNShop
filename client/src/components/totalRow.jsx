@@ -1,4 +1,4 @@
-import './items.scss';
+import './rows.scss';
 
 const TotalRow = (props) => {
   const { shops, totals } = props;
