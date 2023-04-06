@@ -1,21 +1,7 @@
-import { useState } from 'react';
-
 import './unitBox.scss';
 
 const UnitBox = (props) => {
-  const [value, setValue] = useState(0);
-
-  const handleIncrement = () => {
-    setValue(value + 1);
-  };
-
-  const handleDecrement = () => {
-    setValue(value - 1);
-  };
-
-  const handleInputChange = (event) => {
-    setValue(event.target.value);
-  };
+  const { value, handleDecrement, handleIncrement, handleInputChange } = props;
 
   return (
     <div className="unity-bar">
