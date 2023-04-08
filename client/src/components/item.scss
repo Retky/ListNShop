@@ -1,0 +1,25 @@
+.item {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.itemCheck {
+  flex-grow: 0.5;
+}
+
+.itemInfo {
+  flex-grow: 3;
+}
+
+.itemMeasure {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.itemUnit {
+  font-size: 13px;
+}
