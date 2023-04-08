@@ -4,22 +4,22 @@ import UnitBox from './unitBox';
 import './item.scss'
 
 const Item = (props) => {
-  const { item } = props;
-
-  const [value, setValue] = useState(0);
+  const { item, value, setValue } = props;
 
   const handleIncrement = () => {
     setValue(value + 1);
+    item.quantity = value + 1;
   };
 
   const handleDecrement = () => {
     setValue(value - 1);
+    item.quantity = value - 1;
   };
 
   const handleInputChange = (event) => {
     setValue(event.target.value);
+    item.quantity = event.target.value;
   };
-
 
   const element = (
     <div className="item">

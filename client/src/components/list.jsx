@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { fetchLocalShops } from '../redux/shops';
@@ -11,11 +11,14 @@ import './list.scss';
 
 const List = (props) => {
   const { id } = props;
-  const [totals, setTotals] = React.useState({});
 
   const dispatch = useDispatch();
   const shops = useSelector((store) => store.shops);
   const listItems = useSelector((store) => store.listItems);
+
+  const [totals, setTotals] = useState({})
+
+  let finalTotals = {};
 
   useEffect(() => {
     dispatch(fetchLocalShops());
@@ -23,26 +26,27 @@ const List = (props) => {
   }, [dispatch, id]);
 
   useEffect(() => {
-    let totals = {};
-    listItems.forEach((item) => {
-      item.prices.forEach((price) => {
-        if (totals[price.shop_id]) {
-          totals[price.shop_id] += price.price * item.quantity;
-        } else {
-          totals[price.shop_id] = price.price * item.quantity;
-        }
-      });
+    console.log('totals', totals);
+    shops.forEach((shop) => {
+      // get all the totals with the same shop id
+      let shopTotals = Object.values(totals).map((item) => item[shop.id]);
+      console.log('shopTotals', shopTotals);
+      // sum all the totals
+      let sum = shopTotals.reduce((a, b) => a + b, 0);
+      console.log('sum', sum);
+      // add the sum to the final totals
+      finalTotals[shop.id] = sum;
     });
-    setTotals(totals);
-  }, [listItems]);
+    console.log('finalTotals', finalTotals);
+  }, [totals]);
 
   const list = (
     <ul className="shoppingList">
       <ColumnsRow shops={shops} />
-      {listItems.map((item, index) => (
-        <ItemRow key={`item-${item.id}`} item={item} shops={shops} />
+      {listItems.map((item) => (
+        <ItemRow key={`item-${item.id}`} item={item} shops={shops} totals={totals} setTotals={setTotals} />
       ))}
-      <TotalRow shops={shops} totals={totals} />
+      <TotalRow shops={shops} totals={finalTotals} />
     </ul>
   );
 

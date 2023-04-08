@@ -1,4 +1,5 @@
 const FETCH_LOCAL_LIST_ITEMS = 'FETCH_LOCAL_LIST_ITEMS';
+const SAVE_LOCAL_LIST_ITEMS = 'SAVE_LOCAL_LIST_ITEMS';
 
 const initialState = [];
 
@@ -22,9 +23,21 @@ export const fetchLocalListItems = (listId) => {
   };
 };
 
+export const saveLocalListItems = (listItems) => {
+  localStorage.setItem('list_items', JSON.stringify(listItems));
+
+  return {
+    type: SAVE_LOCAL_LIST_ITEMS,
+    payload: listItems,
+  };
+};
+
+
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case FETCH_LOCAL_LIST_ITEMS:
+      return action.payload;
+    case SAVE_LOCAL_LIST_ITEMS:
       return action.payload;
     default:
       return state;
