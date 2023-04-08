@@ -21,6 +21,8 @@ const Home = () => {
     dispatch(fetchLocalListItems(quickList ? quickList.id : 0));
   }, [dispatch, quickList]);
 
+  const totals = {};
+
   const handleIncrement = () => {
   };
 
@@ -71,10 +73,10 @@ const Home = () => {
               {shops.map((shop) => (
                   <div key={`shop-${shop.id}`} className="price">
                     <div>
-                      {item.prices.find((price) => price.item_id === item.item.id && price.shop_id === shop.id)?.price || '-'}
+                      {item.prices.find((price) => price.shop_id === shop.id)?.price || '-'}
                     </div>
                     <div className="totalPrice">
-                      {item.prices.find((price) => price.item_id === item.item.id && price.shop_id === shop.id)?.price * item.quantity || '-'}
+                      {item.prices.find((price) => price.shop_id === shop.id)?.price * item.quantity || '-'}
                     </div>
                   </div>
                 )
@@ -88,7 +90,7 @@ const Home = () => {
             {shops.map((shop) => (
               <div key={`shop-${shop.id}`} className="price">
                 <div>
-                  -
+                  {totals[shop.id] || '-'}
                 </div>
               </div>
             ))}
