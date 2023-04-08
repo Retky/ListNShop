@@ -3,10 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import { fetchLocalLists } from '../redux/lists';
 
-import TitleBar from '../components/titleBar';
-import List from '../components/list';
-import BestTotal from '../components/bestTotal';
-import Footer from '../components/footer';
+import './home.scss';
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -18,10 +15,22 @@ const Home = () => {
 
   const page = (
     <div>
-      <TitleBar title={quickList ? quickList.name : 'New List'} />
+      <div className="titleBar">
+        <h2 className="listTitle">{quickList ? quickList.name : 'New List'}</h2>
+      </div>
+      {/*
       <List id={quickList ? quickList.id : 0} />
       <BestTotal />
-      <Footer />
+      */}
+      <footer>
+        <div className='button'></div>
+        <div className='button'></div>
+        <div>
+          <div className='addBtn'></div>
+        </div>
+        <div className='button'></div>
+        <div className='button'></div>
+      </footer>
     </div>
   );
 
