@@ -1,13 +1,13 @@
 import { configureStore, combineReducers } from '@reduxjs/toolkit';
 import lists from './lists';
 import shops from './shops';
-import listItems from './listItems';
+import items from './items';
 
 const store = configureStore({
   reducer: combineReducers({
     lists,
     shops,
-    listItems,
+    items,
   }),
 });
 

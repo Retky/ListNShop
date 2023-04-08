@@ -3,14 +3,14 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import { fetchLocalLists } from '../redux/lists';
 import { fetchLocalShops } from '../redux/shops';
-import { fetchLocalListItems } from '../redux/listItems';
-import './home.scss';
+import { fetchLocalListItems } from '../redux/items';
+import '../components/styles/home.scss';
 
 const Home = () => {
   const dispatch = useDispatch();
   const quickList = useSelector((store) => store.lists[store.lists.length-1]);
   const shops = useSelector((store) => store.shops);
-  const listItems = useSelector((store) => store.listItems);
+  const listItems = useSelector((store) => store.items);
 
   useEffect(() => {
     dispatch(fetchLocalLists());
