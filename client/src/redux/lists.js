@@ -1,6 +1,6 @@
 const FETCH_LOCAL_LISTS = 'FETCH_LOCAL_LISTS';
 
-const initialState = [];
+const initialState = [{ id: 0, name: 'New List' }];
 
 export const fetchLocalLists = () => {
   const lists = JSON.parse(localStorage.getItem('lists')) || initialState;

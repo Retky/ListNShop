@@ -1,9 +1,8 @@
-const FETCH_LOCAL_LIST_ITEMS = 'FETCH_LOCAL_LIST_ITEMS';
-const SAVE_LOCAL_LIST_ITEMS = 'SAVE_LOCAL_LIST_ITEMS';
+const FETCH_LOCAL_PRICES = 'FETCH_LOCAL_PRICES';
 
 const initialState = [];
 
-export const fetchLocalListItems = (listId) => {
+export const fetchLocalPrices = (listId) => {
   const listItems = JSON.parse(localStorage.getItem('list_items')) || initialState;
   const items = JSON.parse(localStorage.getItem('items')) || initialState;
   const storagePrices = JSON.parse(localStorage.getItem('prices')) || initialState;

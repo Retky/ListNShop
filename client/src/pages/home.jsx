@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { fetchLocalLists } from '../redux/lists';
@@ -18,18 +18,24 @@ const Home = () => {
 
   useEffect(() => {
     dispatch(fetchLocalShops());
-    dispatch(fetchLocalListItems(quickList ? quickList.id : 0));
+    dispatch(fetchLocalListItems(quickList.id));
   }, [dispatch, quickList]);
 
-  const totals = {};
+  let totals = {};
 
-  const handleIncrement = () => {
+  const handleIncrement = (event) => {
+    const itemId = event.target.getAttribute('item');
+    console.log(itemId);
   };
 
-  const handleDecrement = () => {
+  const handleDecrement = (event) => {
+    const itemId = event.target.getAttribute('item');
+    console.log(itemId);
   };
 
   const handleInputChange = (event) => {
+    const itemId = event.target.getAttribute('item');
+    console.log(itemId);
   };
 
   const page = (
@@ -59,9 +65,9 @@ const Home = () => {
                     <div className="itemQuantity">
 
                       <div className="unity-bar">
-                        <button className="unity-bar__button" onClick={handleDecrement}>-</button>
-                        <input className="unity-bar__input" type="number" value={item.quantity} onChange={handleInputChange} />
-                        <button className="unity-bar__button" onClick={handleIncrement}>+</button>
+                        <button className="unity-bar__button" onClick={handleDecrement} item={item.id}>-</button>
+                        <input className="unity-bar__input" type="number" value={item.quantity} onChange={handleInputChange} item={item.id} />
+                        <button className="unity-bar__button" onClick={handleIncrement} item={item.id}>+</button>
                       </div>
                     </div>
                     <div className="itemUnit">{item.unit}</div>
