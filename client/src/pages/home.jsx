@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { fetchLocalLists } from '../redux/lists';
@@ -47,7 +47,7 @@ const Home = () => {
           <div className='itemCol titles'>Item</div>
           <div className='shopCol titles'>
             {shops.map((shop) => (
-                <div key={`shop-${shop.id}`} className='price'>{shop.name}</div>
+              <div key={`shop-${shop.id}`} className='price'>{shop.name}</div>
             ))}
           </div>
         </li>
@@ -62,7 +62,6 @@ const Home = () => {
                   <div className="itemName">{item.item.name}</div>
                   <div className="itemMeasure">
                     <div className="itemQuantity">
-
                       <div className="unity-bar">
                         <button className="unity-bar__button" onClick={handleDecrement} item={item.id}>-</button>
                         <input className="unity-bar__input" type="number" value={item.quantity} onChange={handleInputChange} item={item.id} />
@@ -79,7 +78,7 @@ const Home = () => {
                 const price = prices.find((price) => price.shop_id === shop.id && price.item_id === item.item.id);
                 const unitPrice = price !== undefined ? price.price : '-';
                 const totalPrice = price !== undefined ? `$ ${(price.price * item.quantity).toFixed(2)}` : '-';
-                
+
                 if (price !== undefined) {
                   if (total[shop.id] === undefined) {
                     total[shop.id] = price.price * item.quantity;
@@ -87,9 +86,6 @@ const Home = () => {
                     total[shop.id] += price.price * item.quantity;
                   }
                 }
-
-                console.log(total);
-
                 return (
                   <div key={`shop-${shop.id}`} className="price">
                     <div>
