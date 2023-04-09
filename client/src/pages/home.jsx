@@ -13,10 +13,7 @@ const Home = () => {
   const shops = useSelector((store) => store.shops);
   const listItems = useSelector((store) => store.items);
   const prices = useSelector((store) => store.prices);
-  const totals = {};
-
-  console.log(prices);
-  console.log('item', listItems);
+  const total = {};
 
   useEffect(() => {
     dispatch(fetchLocalLists());
@@ -78,17 +75,32 @@ const Home = () => {
               </div>
             </div>
             <div className={'shopCol'}>
-              {shops.map((shop) => (
+              {shops.map((shop) => {
+                const price = prices.find((price) => price.shop_id === shop.id && price.item_id === item.item.id);
+                const unitPrice = price !== undefined ? price.price : '-';
+                const totalPrice = price !== undefined ? `$ ${(price.price * item.quantity).toFixed(2)}` : '-';
+                
+                if (price !== undefined) {
+                  if (total[shop.id] === undefined) {
+                    total[shop.id] = price.price * item.quantity;
+                  } else {
+                    total[shop.id] += price.price * item.quantity;
+                  }
+                }
+
+                console.log(total);
+
+                return (
                   <div key={`shop-${shop.id}`} className="price">
                     <div>
-                      {prices.find((price) => price.shop_id === shop.id && price.item_id === item.item.id)?.price || '-'}
+                      {unitPrice}
                     </div>
                     <div className="totalPrice">
-                      {prices.find((price) => price.shop_id === shop.id && price.item_id === item.item.id)?.price * item.quantity || '-'}
+                      {totalPrice}
                     </div>
                   </div>
                 )
-              )}
+              })}
             </div>
           </li>
         ))}
@@ -98,7 +110,7 @@ const Home = () => {
             {shops.map((shop) => (
               <div key={`shop-${shop.id}`} className="price">
                 <div>
-                  {totals[shop.id] || '-'}
+                  $ {total[shop.id] ? total[shop.id].toFixed(2) : '-'}
                 </div>
               </div>
             ))}
