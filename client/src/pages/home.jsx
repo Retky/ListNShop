@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { fetchLocalLists } from '../redux/lists';
 import { fetchLocalShops } from '../redux/shops';
 import { fetchLocalListItems } from '../redux/items';
+import { fetchLocalPrices } from '../redux/prices';
 import '../components/styles/home.scss';
 
 const Home = () => {
@@ -11,28 +12,29 @@ const Home = () => {
   const quickList = useSelector((store) => store.lists[store.lists.length-1]);
   const shops = useSelector((store) => store.shops);
   const listItems = useSelector((store) => store.items);
+  const prices = useSelector((store) => store.prices);
+  const totals = {};
+
+  console.log(prices);
+  console.log('item', listItems);
 
   useEffect(() => {
     dispatch(fetchLocalLists());
   }, [dispatch]);
-
   useEffect(() => {
     dispatch(fetchLocalShops());
     dispatch(fetchLocalListItems(quickList.id));
+    dispatch(fetchLocalPrices());
   }, [dispatch, quickList]);
-
-  let totals = {};
 
   const handleIncrement = (event) => {
     const itemId = event.target.getAttribute('item');
     console.log(itemId);
   };
-
   const handleDecrement = (event) => {
     const itemId = event.target.getAttribute('item');
     console.log(itemId);
   };
-
   const handleInputChange = (event) => {
     const itemId = event.target.getAttribute('item');
     console.log(itemId);
@@ -79,10 +81,10 @@ const Home = () => {
               {shops.map((shop) => (
                   <div key={`shop-${shop.id}`} className="price">
                     <div>
-                      {item.prices.find((price) => price.shop_id === shop.id)?.price || '-'}
+                      {prices.find((price) => price.shop_id === shop.id && price.item_id === item.item.id)?.price || '-'}
                     </div>
                     <div className="totalPrice">
-                      {item.prices.find((price) => price.shop_id === shop.id)?.price * item.quantity || '-'}
+                      {prices.find((price) => price.shop_id === shop.id && price.item_id === item.item.id)?.price * item.quantity || '-'}
                     </div>
                   </div>
                 )
@@ -117,7 +119,6 @@ const Home = () => {
       </footer>
     </div>
   );
-
   return page;
 };
 

@@ -1,32 +1,17 @@
 const FETCH_LOCAL_PRICES = 'FETCH_LOCAL_PRICES';
-
 const initialState = [];
 
-export const fetchLocalPrices = (listId) => {
-  const listItems = JSON.parse(localStorage.getItem('list_items')) || initialState;
-  const items = JSON.parse(localStorage.getItem('items')) || initialState;
-  const storagePrices = JSON.parse(localStorage.getItem('prices')) || initialState;
-
-  const filterListItems = listItems.filter((listItem) => listItem.list_id === listId);
-
-  const listItemsWithItems = filterListItems.map((listItem) => {
-    const item = items.find((item) => item.id === listItem.item_id);
-    const prices = storagePrices.filter((price) => price.item_id === listItem.item_id);
-
-    return { ...listItem, item, prices };
-  });
-
+export const fetchLocalPrices = () => {
+  const prices = JSON.parse(localStorage.getItem('prices')) || initialState;
   return {
-    type: FETCH_LOCAL_LIST_ITEMS,
-    payload: listItemsWithItems,
+    type: FETCH_LOCAL_PRICES,
+    payload: prices,
   };
 };
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case FETCH_LOCAL_LIST_ITEMS:
-      return action.payload;
-    case SAVE_LOCAL_LIST_ITEMS:
+    case FETCH_LOCAL_PRICES:
       return action.payload;
     default:
       return state;
