@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import { fetchLocalLists } from '../redux/lists';
 import { fetchLocalShops } from '../redux/shops';
-import { fetchLocalListItems } from '../redux/items';
+import { fetchLocalItems } from '../redux/items';
 import { fetchLocalPrices } from '../redux/prices';
 import '../components/styles/home.scss';
 
@@ -20,21 +20,21 @@ const Home = () => {
   }, [dispatch]);
   useEffect(() => {
     dispatch(fetchLocalShops());
-    dispatch(fetchLocalListItems(quickList.id));
+    dispatch(fetchLocalItems(quickList.id));
     dispatch(fetchLocalPrices());
   }, [dispatch, quickList]);
 
   const handleIncrement = (event) => {
     const itemId = event.target.getAttribute('item');
-    console.log(itemId);
+    
   };
   const handleDecrement = (event) => {
     const itemId = event.target.getAttribute('item');
-    console.log(itemId);
+    
   };
   const handleInputChange = (event) => {
     const itemId = event.target.getAttribute('item');
-    console.log(itemId);
+    
   };
 
   const page = (
@@ -59,7 +59,7 @@ const Home = () => {
                   <input type="checkbox" />
                 </div>
                 <div className="itemInfo">
-                  <div className="itemName">{item.item.name}</div>
+                  <div className="itemName">{item.name}</div>
                   <div className="itemMeasure">
                     <div className="itemQuantity">
                       <div className="unity-bar">
@@ -75,7 +75,7 @@ const Home = () => {
             </div>
             <div className={'shopCol'}>
               {shops.map((shop) => {
-                const price = prices.find((price) => price.shop_id === shop.id && price.item_id === item.item.id);
+                const price = prices.find((price) => price.shop_id === shop.id && price.item_id === item.id);
                 const unitPrice = price !== undefined ? price.price : '-';
                 const totalPrice = price !== undefined ? `$ ${(price.price * item.quantity).toFixed(2)}` : '-';
 
