@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import { fetchLocalLists } from '../redux/lists';
 import { fetchLocalShops } from '../redux/shops';
-import { fetchLocalItems } from '../redux/items';
+import { fetchLocalItems, updateLocalItemQuantity, incLocalItemQuantity, decLocalItemQuantity } from '../redux/items';
 import { fetchLocalPrices } from '../redux/prices';
 import '../components/styles/home.scss';
 
@@ -25,16 +25,18 @@ const Home = () => {
   }, [dispatch, quickList]);
 
   const handleIncrement = (event) => {
-    const itemId = event.target.getAttribute('item');
-    
+    const itemId = parseInt(event.target.getAttribute('item'));
+    dispatch(incLocalItemQuantity(itemId));
   };
   const handleDecrement = (event) => {
-    const itemId = event.target.getAttribute('item');
-    
+    const itemId = parseInt(event.target.getAttribute('item'));
+    dispatch(decLocalItemQuantity(itemId));
   };
   const handleInputChange = (event) => {
-    const itemId = event.target.getAttribute('item');
-    
+    const itemId = parseInt(event.target.getAttribute('item'));
+    const newQuantity = parseInt(event.target.value);
+    dispatch(updateLocalItemQuantity(itemId, newQuantity));
+    console.log('listItems', listItems);
   };
 
   const page = (
@@ -78,7 +80,6 @@ const Home = () => {
                 const price = prices.find((price) => price.shop_id === shop.id && price.item_id === item.id);
                 const unitPrice = price !== undefined ? price.price : '-';
                 const totalPrice = price !== undefined ? `$ ${(price.price * item.quantity).toFixed(2)}` : '-';
-
                 if (price !== undefined) {
                   if (total[shop.id] === undefined) {
                     total[shop.id] = price.price * item.quantity;
