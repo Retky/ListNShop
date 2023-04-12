@@ -1,5 +1,7 @@
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faPlus } from '@fortawesome/free-solid-svg-icons'
 
 import { fetchLocalLists } from '../redux/lists';
 import { fetchLocalShops } from '../redux/shops';
@@ -154,7 +156,9 @@ const Home = () => {
         <div className='button'></div>
         <div className='button'></div>
         <div>
-          <div className='addBtn'></div>
+          <div className='addBtn'>
+            <FontAwesomeIcon className='plus' icon={faPlus} />
+          </div>
         </div>
         <div className='button'></div>
         <div className='button'></div>
