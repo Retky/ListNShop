@@ -81,6 +81,7 @@
 }
 
 .shopCol {
+  width: 60%;
   background-color: $secondary-grey;
   flex-grow: 1;
   display: flex;
@@ -91,27 +92,26 @@
   padding-top: 31px;
 }
 
+.unitPrice {
+  box-sizing: border-box;
+  border: none;
+  background-color: transparent;
+  width: 80%;
+  text-align: center;
+  -webkit-appearance: none;
+  -moz-appearance:textfield;
+}
+
 .totalPrice {
   font-weight: bold;
 }
 
 .item {
-  width: 100%;
   display: flex;
-  justify-content: space-around;
   align-items: center;
 }
 
-.itemCheck {
-  flex-grow: 0.5;
-}
-
-.itemInfo {
-  flex-grow: 3;
-}
-
 .itemMeasure {
-  width: 100%;
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -119,6 +119,7 @@
 
 .itemUnit {
   font-size: 13px;
+  width: 80%;
 }
 
 .unity-bar {
@@ -148,7 +149,7 @@
 }
 
 .unity-bar__input {
-  height: 15px;
+  height: 13px;
   width: 100%;
   flex: 1;
   text-align: center;
