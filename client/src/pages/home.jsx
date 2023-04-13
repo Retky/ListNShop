@@ -1,12 +1,12 @@
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPlus } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPlus } from '@fortawesome/free-solid-svg-icons';
 
 import { fetchLocalLists } from '../redux/lists';
 import { fetchLocalShops } from '../redux/shops';
 import { fetchLocalItems, updateLocalItemQuantity, incLocalItemQuantity, decLocalItemQuantity } from '../redux/items';
-import { fetchLocalPrices } from '../redux/prices';
+import { fetchLocalPrices, updateLocalPrice } from '../redux/prices';
 import '../components/styles/home.scss';
 
 const Home = () => {
@@ -40,6 +40,13 @@ const Home = () => {
     const newQuantity = parseInt(event.target.value);
     dispatch(updateLocalItemQuantity(itemId, newQuantity));
   };
+  const handleSetPrice = (event) => {
+    const itemId = parseInt(event.target.getAttribute('item'));
+    const shopId = parseInt(event.target.getAttribute('shop'));
+    const newPrice = parseFloat(event.target.value).toFixed(2);
+    dispatch(updateLocalPrice( newPrice, itemId, shopId));
+  };
+  const handlePriceChange = () => {};
 
   const getBestShop = () => {
     if (Object.keys(bestPrices).length === 0) return null;
@@ -68,7 +75,14 @@ const Home = () => {
         </li>
         {listItems.map((item) => {
           const itemPrices = prices.filter((price) => price.item_id === item.id);
-          const bestPrice = itemPrices.reduce((acc, price) => { return acc.price < price.price ? acc : price; });
+          const bestPrice = {};
+          if (itemPrices.length !== 0) {
+            const newBestPrice = itemPrices.reduce((acc, price) => { return acc.price < price.price ? acc : price; });
+            bestPrice.price = newBestPrice.price;
+            bestPrice.shop_id = newBestPrice.shop_id;
+            bestPrice.item_id = newBestPrice.item_id;
+            bestPrice.id = newBestPrice.id;
+          }
           return (
             <li key={`item-${item.id}`} className="row">
               <div className="itemCol" >
@@ -93,9 +107,9 @@ const Home = () => {
               </div>
               <div className={'shopCol'}>
                 {shops.map((shop) => {
-                  const isBestPrice = bestPrice.shop_id === shop.id;
                   const notPrice = prices.find((price) => price.shop_id === shop.id && price.item_id === item.id) === undefined;
                   const price = prices.find((price) => price.shop_id === shop.id && price.item_id === item.id);
+                  const isBestPrice = bestPrice.price === price.price;
                   const unitPrice = price !== undefined ? price.price : bestPrice.price;
                   const totalPrice = price !== undefined ? `$ ${(price.price * item.quantity).toFixed(2)}` : `$ ${(bestPrice.price * item.quantity).toFixed(2)}`;
                   if (isBestPrice) {
@@ -120,9 +134,7 @@ const Home = () => {
                   }
                   return (
                     <div key={`shop-${shop.id}`} className={`price ${isBestPrice ? 'bestPrice' : ''} ${notPrice ? 'notPrice' : ''}`}>
-                      <div>
-                        {unitPrice}
-                      </div>
+                      <input type="number" step={0.01} className="unitPrice" defaultValue={unitPrice} onBlur={handleSetPrice} onChange={handlePriceChange} item={item.id} shop={shop.id} />
                       <div className="totalPrice">
                         {totalPrice}
                       </div>
@@ -153,15 +165,15 @@ const Home = () => {
         <h3 className="bestTotal">{ getBestShop() ? `Best Prices in: ${getBestShop().name}` : '' }</h3>
       </div>
       <footer>
-        <div className='button'></div>
-        <div className='button'></div>
+        <div className='button'>Save</div>
+        <div className='button'>Lists</div>
         <div>
           <div className='addBtn'>
             <FontAwesomeIcon className='plus' icon={faPlus} />
           </div>
         </div>
-        <div className='button'></div>
-        <div className='button'></div>
+        <div className='button'>Shops</div>
+        <div className='button'>Items</div>
       </footer>
     </div>
   );
