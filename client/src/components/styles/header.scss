@@ -30,3 +30,15 @@ nav {
 .userBtn {
   @include box-button($button-color);
 }
+
+.burger {
+  height: 50%;
+  width: 50%;
+  color: $accent-color;
+}
+
+.user {
+  height: 80%;
+  width: 80%;
+  color: $accent-color;
+}
