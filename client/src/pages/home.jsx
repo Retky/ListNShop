@@ -1,22 +1,23 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlus } from '@fortawesome/free-solid-svg-icons';
+import { faPlus, faCircleXmark } from '@fortawesome/free-solid-svg-icons';
 
 import { fetchLocalLists } from '../redux/lists';
 import { fetchLocalShops } from '../redux/shops';
-import { fetchLocalItems, updateLocalItemQuantity, incLocalItemQuantity, decLocalItemQuantity } from '../redux/items';
-import { fetchLocalPrices, updateLocalPrice } from '../redux/prices';
+import { fetchLocalItems, updateLocalItemQuantity, incLocalItemQuantity, decLocalItemQuantity, addLocalItem } from '../redux/items';
+import { fetchLocalPrices, updateLocalPrice, addLocalPrice } from '../redux/prices';
 import '../components/styles/home.scss';
 
 const Home = () => {
   const dispatch = useDispatch();
-  const quickList = useSelector((store) => store.lists[store.lists.length-1]);
+  const quickList = useSelector((store) => store.lists.length -1); 
   const shops = useSelector((store) => store.shops);
   const listItems = useSelector((store) => store.items);
   const prices = useSelector((store) => store.prices);
   const total = {};
   const bestPrices = {};
+  const [showForm, setShowForm] = useState(false);
 
   useEffect(() => {
     dispatch(fetchLocalLists());
@@ -47,6 +48,41 @@ const Home = () => {
     dispatch(updateLocalPrice( newPrice, itemId, shopId));
   };
   const handlePriceChange = () => {};
+  const handleAddItem = () => {
+    setShowForm(true);
+  };
+  const handleAddItemSubmit = (e) => {
+    e.preventDefault();
+    const itemName = e.target['item-name'].value;
+    const itemQuantity = e.target['item-quantity'].value;
+    const itemUnit = e.target['item-unit'].value;
+    let itemId = listItems.length;
+    while (listItems.find((item) => item.id === itemId)) {
+      itemId += 1; 
+    }
+    const newItem = {
+      id: itemId,
+      checked: false,
+      name: itemName,
+      quantity: itemQuantity,
+      unit: itemUnit,
+      list_id: quickList.id,
+    };
+    const newPrices = [];
+    shops.forEach((shop) => {
+      const price = e.target[`item-price-${shop.id}`].value;
+      newPrices.push({
+        price,
+        item_id: itemId,
+        shop_id: shop.id,
+      });
+    });
+    console.log('1', newItem);
+    console.log('2', newPrices);
+    dispatch(addLocalPrice(newPrices));
+    dispatch(addLocalItem(newItem, newPrices));
+    setShowForm(false);
+  };
 
   const getBestShop = () => {
     if (Object.keys(bestPrices).length === 0) return null;
@@ -58,6 +94,36 @@ const Home = () => {
     });
     return shops.find((shop) => shop.id === parseInt(bestShop));
   };
+  
+  const itemForm = (
+    <div className="itemFormContainer" style={showForm ? { display: 'flex' } : { display: 'none' }}>
+      <form className="itemForm" onSubmit={handleAddItemSubmit}>
+        <FontAwesomeIcon icon={faCircleXmark} onClick={() => setShowForm(false)} />
+        <div className="itemForm__row">
+          <label className="itemForm__label" htmlFor="item-name">Item Name</label>
+          <input className="itemForm__input" type="text" name="item-name" required />
+        </div>
+        <div className="itemForm__row">
+          <label className="itemForm__label" htmlFor="item-quantity">Quantity</label>
+          <input className="itemForm__input" type="number" name="item-quantity" defaultValue={0} />
+        </div>
+        <div className="itemForm__row">
+          <label className="itemForm__label" htmlFor="item-unit">Unit</label>
+          <input className="itemForm__input" type="text" name="item-unit" required />
+        </div>
+        <div className="itemForm__row">
+          <label className="itemForm__label" htmlFor="item-price">Prices</label>
+          {shops.map((shop) => (
+            <div key={`shop-${shop.id}`} className="itemForm__row">
+              <label className="itemForm__label" htmlFor={`item-price-${shop.id}`}>{shop.name}</label>
+              <input className="itemForm__input" type="number" name={`item-price-${shop.id}`} defaultValue={0.00} />
+            </div>
+          ))}
+          <button className="itemForm__button" type="submit">Add Item</button>
+        </div>
+      </form>
+    </div>
+  );
 
   const page = (
     <div>
@@ -109,7 +175,10 @@ const Home = () => {
                 {shops.map((shop) => {
                   const notPrice = prices.find((price) => price.shop_id === shop.id && price.item_id === item.id) === undefined;
                   const price = prices.find((price) => price.shop_id === shop.id && price.item_id === item.id);
-                  const isBestPrice = bestPrice.price === price.price;
+                  let isBestPrice = false;
+                  if (price !== undefined) {
+                    isBestPrice = price.price === bestPrice.price;
+                  }
                   const unitPrice = price !== undefined ? price.price : bestPrice.price;
                   const totalPrice = price !== undefined ? `$ ${(price.price * item.quantity).toFixed(2)}` : `$ ${(bestPrice.price * item.quantity).toFixed(2)}`;
                   if (isBestPrice) {
@@ -162,13 +231,14 @@ const Home = () => {
         </li>
       </ul>
       <div className="bestBar">
-        <h3 className="bestTotal">{ getBestShop() ? `Best Prices in: ${getBestShop().name}` : '' }</h3>
+        <h3 className="bestTotal">{ getBestShop() ? `Best Price in: ${getBestShop().name}` : '' }</h3>
       </div>
+      {itemForm}
       <footer>
         <div className='button'>Save</div>
         <div className='button'>Lists</div>
         <div>
-          <div className='addBtn'>
+          <div className='addBtn' onClick={handleAddItem}>
             <FontAwesomeIcon className='plus' icon={faPlus} />
           </div>
         </div>
