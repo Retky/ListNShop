@@ -1,5 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Meddon&display=swap');
-@import './base.scss';
+@import './variables.scss';
 
 header {
   background-color: $primary-color;
@@ -9,6 +9,7 @@ header {
   padding: 40px 20px 0;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   display: flex;
+  position: fixed;
   justify-content: space-between;
   z-index: 8;
 }
@@ -29,4 +30,16 @@ nav {
 
 .userBtn {
   @include box-button($button-color);
+}
+
+.burger {
+  height: 50%;
+  width: 50%;
+  color: $accent-color;
+}
+
+.user {
+  height: 80%;
+  width: 80%;
+  color: $accent-color;
 }

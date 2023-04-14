@@ -1,6 +1,7 @@
 const FETCH_LOCAL_SHOPS = 'FETCH_LOCAL_SHOPS';
-
-const initialState = [];
+const initialState = [
+  { id: 0, name: 'Default' },
+];
 
 export const fetchLocalShops = () => {
   const shops = JSON.parse(localStorage.getItem('shops')) || initialState;

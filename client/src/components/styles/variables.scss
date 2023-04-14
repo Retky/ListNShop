@@ -10,4 +10,6 @@ $secondary-grey: #BABABA;
   height: 40px;
   border-radius: 10px;
   background-color: $bg-color;
+  display: grid;
+  place-items: center;
 }
