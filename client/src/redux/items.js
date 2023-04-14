@@ -50,7 +50,6 @@ export const decLocalItemQuantity = (itemId) => {
 };
 
 export const addLocalItem = (item) => {
-  console.log('item', item);
   const items = JSON.parse(localStorage.getItem('items'));
   items.push(item);
   localStorage.setItem('items', JSON.stringify(items));

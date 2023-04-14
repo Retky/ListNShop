@@ -38,7 +38,7 @@ const Home = () => {
   };
   const handleInputChange = (event) => {
     const itemId = parseInt(event.target.getAttribute('item'));
-    const newQuantity = parseInt(event.target.value);
+    const newQuantity = parseFloat(event.target.value);
     dispatch(updateLocalItemQuantity(itemId, newQuantity));
   };
   const handleSetPrice = (event) => {
@@ -77,10 +77,9 @@ const Home = () => {
         shop_id: shop.id,
       });
     });
-    console.log('1', newItem);
-    console.log('2', newPrices);
     dispatch(addLocalPrice(newPrices));
     dispatch(addLocalItem(newItem, newPrices));
+    e.target.reset();
     setShowForm(false);
   };
 
@@ -105,7 +104,7 @@ const Home = () => {
         </div>
         <div className="itemForm__row">
           <label className="itemForm__label" htmlFor="item-quantity">Quantity</label>
-          <input className="itemForm__input" type="number" name="item-quantity" defaultValue={0} />
+          <input className="itemForm__input" type="number" step="0.05" name="item-quantity" defaultValue={0} />
         </div>
         <div className="itemForm__row">
           <label className="itemForm__label" htmlFor="item-unit">Unit</label>
@@ -116,7 +115,7 @@ const Home = () => {
           {shops.map((shop) => (
             <div key={`shop-${shop.id}`} className="itemForm__row">
               <label className="itemForm__label" htmlFor={`item-price-${shop.id}`}>{shop.name}</label>
-              <input className="itemForm__input" type="number" name={`item-price-${shop.id}`} defaultValue={0.00} />
+              <input className="itemForm__input" type="number" step="0.05" name={`item-price-${shop.id}`} defaultValue={0.00} />
             </div>
           ))}
           <button className="itemForm__button" type="submit">Add Item</button>
@@ -162,7 +161,7 @@ const Home = () => {
                       <div className="itemQuantity">
                         <div className="unity-bar">
                           <button className="unity-bar__button" onClick={handleDecrement} item={item.id} >-</button>
-                          <input className="unity-bar__input" type="number" value={item.quantity} onChange={handleInputChange} item={item.id} />
+                          <input className="unity-bar__input" type="number" step="0.05" value={item.quantity} onChange={handleInputChange} item={item.id} />
                           <button className="unity-bar__button" onClick={handleIncrement} item={item.id}>+</button>
                         </div>
                       </div>
@@ -230,8 +229,10 @@ const Home = () => {
           </div>
         </li>
       </ul>
-      <div className="bestBar">
-        <h3 className="bestTotal">{ getBestShop() ? `Best Price in: ${getBestShop().name}` : '' }</h3>
+      <div className="bestBarContainer">
+        <div className="bestBar">
+          <h3 className="bestTotal">{ getBestShop() ? `Best Price in: ${getBestShop().name}` : '' }</h3>
+        </div>
       </div>
       {itemForm}
       <footer>

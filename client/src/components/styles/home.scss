@@ -10,6 +10,7 @@
   width: calc(100vw - 50px);
   left: 50%;
   transform: translateX(-50%);
+  margin-top: 100px;
 }
 
 .listTitle {
@@ -23,8 +24,9 @@
   position: relative;
   z-index: 4;
   list-style: none;
-  margin: 0;
+  margin: 100px 0 0 0;
   padding: 0;
+  overflow: auto;
   
   li {
     &:nth-child(odd) {
@@ -159,16 +161,19 @@
   -moz-appearance:textfield;
 }
 
+.bestBarContainer {
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+}
+
 .bestBar {
   background-color: $secondary-grey;
   padding: 5px;
   border-radius: 0 0 25px 25px;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   z-index: 3;
-  position: fixed;
   width: calc(100vw - 50px);
-  left: 50%;
-  transform: translateX(-50%);
 
   .bestTotal {
     font-size: 16px;
