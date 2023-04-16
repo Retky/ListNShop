@@ -124,6 +124,14 @@ const Home = () => {
     </div>
   );
 
+  const shopsList = (
+    <div className="shopCol">
+      {shops.map((shop) => (
+        <div key={`shop-${shop.id}`} className="price">{shop.name}</div>
+      ))}
+    </div>
+  );
+
   const page = (
     <div>
       <div className="titleBar">
