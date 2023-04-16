@@ -2,42 +2,16 @@
 
 > An application to help keep track of shopping lists, allowing the user to compare prices from different stores.
 
+
 ## 🛠️ Build with
 
-![](https://img.shields.io/badge/NAME-VERSION-green)
-- Major languages
-- Frameworks
-- Technologies used
+![](https://img.shields.io/badge/JavaScript-F7DF1E.svg?logo=javascript&logoColor=black)
+![](https://img.shields.io/badge/HTML5-E34F26.svg?logo=html5&logoColor=white)
+![](https://img.shields.io/badge/CSS3-1572B6.svg?logo=css3&logoColor=white)
 
-
-## 📷 Preview
-
-<!-- 480x360 px -->
-
-
-## 🔗 Live Demo
-
-[Live Demo Link]()
-
-
-## 🚀 Getting Started
-
-**This is an example of how you may give instructions on setting up your project locally.**
-**Modify this file to match your project, remove sections that don't apply. For example: delete the testing section if the currect project doesn't require testing.**
-
-To get a local copy up and running follow these simple example steps.
-
-### 📋 Prerequisites
-
-### ⚙️ Setup
-
-### 💽 Install
-
-### 🖱️ Usage
-
-### 🧪 Run tests
-
-### 📦 Deployment
+![](https://img.shields.io/badge/SCSS-CC6699.svg?logo=sass&logoColor=white)
+![](https://img.shields.io/badge/React-61DAFB.svg?logo=react&logoColor=black)
+![](https://img.shields.io/badge/Redux-764ABC.svg?logo=redux&logoColor=white)
 
 
 ## 👤 Author
@@ -59,13 +33,6 @@ Contributions, issues, and feature requests are welcome! Feel free to get in tou
 ## ✨ Show your support
 
 Give a ⭐️ if you like this project!
-
-
-## 🙏 Acknowledgments
-
-- Hat tip to anyone whose code was used
-- Inspiration
-- etc
 
 
 ## 📝 License
