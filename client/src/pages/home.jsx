@@ -18,6 +18,7 @@ const Home = () => {
   const total = {};
   const bestPrices = {};
   const [showForm, setShowForm] = useState(false);
+  const [showShops, setShowShops] = useState(true);
 
   useEffect(() => {
     dispatch(fetchLocalLists());
@@ -82,6 +83,8 @@ const Home = () => {
     e.target.reset();
     setShowForm(false);
   };
+  const handleAddShop = () => {
+  };
 
   const getBestShop = () => {
     if (Object.keys(bestPrices).length === 0) return null;
@@ -124,10 +127,13 @@ const Home = () => {
     </div>
   );
   const shopsList = (
-    <div className="shopCol">
-      {shops.map((shop) => (
-        <div key={`shop-${shop.id}`} className="price">{shop.name}</div>
-      ))}
+    <div className="shopListContainer" style={showShops ? { display: 'flex' } : { display: 'none' }}>
+      <ul className="shopList">
+        {shops.map((shop) => (
+          <div key={`shop-${shop.id}`} className="price">{shop.name}</div>
+        ))}
+        <button className="addShopButton" onClick={handleAddShop}>Add Shop</button>
+      </ul>
     </div>
   );
   const page = (
@@ -241,6 +247,7 @@ const Home = () => {
         </div>
       </div>
       {itemForm}
+      {shopsList}
       <footer>
         <div className='button'>Save</div>
         <div className='button'>Lists</div>
