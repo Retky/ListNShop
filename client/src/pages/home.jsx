@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus, faCircleXmark } from '@fortawesome/free-solid-svg-icons';
 
 import { fetchLocalLists } from '../redux/lists';
-import { fetchLocalShops } from '../redux/shops';
+import { fetchLocalShops, addLocalShop } from '../redux/shops';
 import { fetchLocalItems, updateLocalItemQuantity, incLocalItemQuantity, decLocalItemQuantity, addLocalItem } from '../redux/items';
 import { fetchLocalPrices, updateLocalPrice, addLocalPrice } from '../redux/prices';
 import '../components/styles/home.scss';
@@ -85,6 +85,15 @@ const Home = () => {
   };
   const handleAddShopSubmit = (e) => {
     e.preventDefault();
+    const shopName = e.target['shop-name'].value;
+    let shopId = shops.length;
+    const newShop = {
+      id: shopId,
+      name: shopName
+    };
+    dispatch(addLocalShop(newShop));
+    e.target.reset();
+    setShowShops(false);
   };
 
   const getBestShop = () => {
