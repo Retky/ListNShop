@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus, faCircleXmark } from '@fortawesome/free-solid-svg-icons';
 
 import { fetchLocalLists } from '../redux/lists';
-import { fetchLocalShops, addLocalShop } from '../redux/shops';
+import { fetchLocalShops, addLocalShop, updateLocalShop } from '../redux/shops';
 import { fetchLocalItems, updateLocalItemQuantity, incLocalItemQuantity, decLocalItemQuantity, addLocalItem } from '../redux/items';
 import { fetchLocalPrices, updateLocalPrice, addLocalPrice } from '../redux/prices';
 import '../components/styles/home.scss';
