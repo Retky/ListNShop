@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlus, faCircleXmark } from '@fortawesome/free-solid-svg-icons';
+import { faPlus, faCircleXmark, faTrash } from '@fortawesome/free-solid-svg-icons';
 
 import { fetchLocalLists } from '../redux/lists';
 import { fetchLocalShops, addLocalShop, updateLocalShop, deleteLocalShop } from '../redux/shops';
@@ -103,6 +103,10 @@ const Home = () => {
   const handleModShopClick = (e) => {
     e.target.setAttribute('contentEditable', true);
   };
+  const handleDelShop = (e) => {
+    const shopId = parseInt(e.target.getAttribute('shop'));
+    dispatch(deleteLocalShop(shopId));
+  };
 
   const getBestShop = () => {
     if (Object.keys(bestPrices).length === 0) return null;
@@ -162,6 +166,8 @@ const Home = () => {
           {shops.map((shop) => (
             <div key={`shop-${shop.id}`} className="price" onClick={handleModShopClick} onBlur={handleModShopSubmit} shop={shop.id}>
               {shop.name}
+              {' '}
+              <FontAwesomeIcon icon={faTrash} onClick={handleDelShop} shop={shop.id} />
             </div>
           ))}
           {shopForm}
