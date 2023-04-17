@@ -21,10 +21,10 @@ export const addLocalShop = (shop) => {
     payload: shops,
   };
 };
-export const updateLocalShop = (shop) => {
+export const updateLocalShop = (shopName, id) => {
   const shops = JSON.parse(localStorage.getItem('shops')) || initialState;
-  const index = shops.findIndex((s) => s.id === shop.id);
-  shops[index] = shop;
+  const shop = shops.find((shop) => shop.id === id);
+  shop.name = shopName;
   localStorage.setItem('shops', JSON.stringify(shops));
   return {
     type: UPDATE_LOCAL_SHOP,

@@ -95,6 +95,14 @@ const Home = () => {
     e.target.reset();
     setShowShops(false);
   };
+  const handleModShopSubmit = (e) => {
+    const shopId = parseInt(e.target.getAttribute('shop'));
+    const shopName = e.target.innerText
+    dispatch(updateLocalShop(shopName, shopId));
+  };
+  const handleModShopClick = (e) => {
+    e.target.setAttribute('contentEditable', true);
+  };
 
   const getBestShop = () => {
     if (Object.keys(bestPrices).length === 0) return null;
@@ -152,7 +160,9 @@ const Home = () => {
         <FontAwesomeIcon icon={faCircleXmark} onClick={() => setShowShops(false)} />
         <ul className="shopList">
           {shops.map((shop) => (
-            <div key={`shop-${shop.id}`} className="price">{shop.name}</div>
+            <div key={`shop-${shop.id}`} className="price" onClick={handleModShopClick} onBlur={handleModShopSubmit} shop={shop.id}>
+              {shop.name}
+            </div>
           ))}
           {shopForm}
         </ul>
