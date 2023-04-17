@@ -18,7 +18,7 @@ const Home = () => {
   const total = {};
   const bestPrices = {};
   const [showForm, setShowForm] = useState(false);
-  const [showShops, setShowShops] = useState(true);
+  const [showShops, setShowShops] = useState(false);
 
   useEffect(() => {
     dispatch(fetchLocalLists());
@@ -270,7 +270,7 @@ const Home = () => {
             <FontAwesomeIcon className='plus' icon={faPlus} />
           </div>
         </div>
-        <div className='button'>Shops</div>
+        <div className='button' onClick={() => setShowShops(true)}>Shops</div>
         <div className='button'>Items</div>
       </footer>
     </div>

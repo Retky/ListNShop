@@ -200,6 +200,7 @@ footer {
 
   .button {
     display: flex;
+    cursor: pointer;
     @include box-button($button-color);
   }
 
