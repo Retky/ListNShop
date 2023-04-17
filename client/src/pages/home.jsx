@@ -19,7 +19,6 @@ const Home = () => {
   const bestPrices = {};
   const [showForm, setShowForm] = useState(false);
   const [showShops, setShowShops] = useState(true);
-  const [showShopForm, setShowShopForm] = useState(false);
 
   useEffect(() => {
     dispatch(fetchLocalLists());
@@ -84,8 +83,6 @@ const Home = () => {
     e.target.reset();
     setShowForm(false);
   };
-  const handleAddShop = () => {
-  };
   const handleAddShopSubmit = (e) => {
     e.preventDefault();
   };
@@ -130,30 +127,27 @@ const Home = () => {
       </form>
     </div>
   );
-
   const shopForm = (
-    <div className="shopFormContainer" style={showShopForm ? { display: 'flex' } : { display: 'none' }}>
+    <div className="shopFormContainer">
       <form className="shopForm" onSubmit={handleAddShopSubmit}>
-        <FontAwesomeIcon icon={faCircleXmark} onClick={() => setShowShopForm(false)} />
         <div className="shopForm__row">
-          <label className="shopForm__label" htmlFor="shop-name">Shop Name</label>
           <input className="shopForm__input" type="text" name="shop-name" required />
         <button className="shopForm__button" type="submit">Add Shop</button>
         </div>
       </form>
     </div>
   );
-    
-
   const shopsList = (
     <div className="shopListContainer" style={showShops ? { display: 'flex' } : { display: 'none' }}>
-      <ul className="shopList">
-        {shops.map((shop) => (
-          <div key={`shop-${shop.id}`} className="price">{shop.name}</div>
-        ))}
-        <button className="addShopButton" onClick={handleAddShop}>Add Shop</button>
-      </ul>
-      {shopForm}
+      <div className="shopsView">
+        <FontAwesomeIcon icon={faCircleXmark} onClick={() => setShowShops(false)} />
+        <ul className="shopList">
+          {shops.map((shop) => (
+            <div key={`shop-${shop.id}`} className="price">{shop.name}</div>
+          ))}
+          {shopForm}
+        </ul>
+      </div>
     </div>
   );
   const page = (
