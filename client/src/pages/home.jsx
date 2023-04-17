@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlus, faCircleXmark } from '@fortawesome/free-solid-svg-icons';
+import { faPlus, faCircleXmark, faTrash } from '@fortawesome/free-solid-svg-icons';
 
 import { fetchLocalLists } from '../redux/lists';
-import { fetchLocalShops } from '../redux/shops';
+import { fetchLocalShops, addLocalShop, updateLocalShop, deleteLocalShop } from '../redux/shops';
 import { fetchLocalItems, updateLocalItemQuantity, incLocalItemQuantity, decLocalItemQuantity, addLocalItem } from '../redux/items';
 import { fetchLocalPrices, updateLocalPrice, addLocalPrice } from '../redux/prices';
 import '../components/styles/home.scss';
@@ -18,6 +18,7 @@ const Home = () => {
   const total = {};
   const bestPrices = {};
   const [showForm, setShowForm] = useState(false);
+  const [showShops, setShowShops] = useState(false);
 
   useEffect(() => {
     dispatch(fetchLocalLists());
@@ -82,6 +83,30 @@ const Home = () => {
     e.target.reset();
     setShowForm(false);
   };
+  const handleAddShopSubmit = (e) => {
+    e.preventDefault();
+    const shopName = e.target['shop-name'].value;
+    let shopId = shops.length;
+    const newShop = {
+      id: shopId,
+      name: shopName
+    };
+    dispatch(addLocalShop(newShop));
+    e.target.reset();
+    setShowShops(false);
+  };
+  const handleModShopSubmit = (e) => {
+    const shopId = parseInt(e.target.getAttribute('shop'));
+    const shopName = e.target.innerText
+    dispatch(updateLocalShop(shopName, shopId));
+  };
+  const handleModShopClick = (e) => {
+    e.target.setAttribute('contentEditable', true);
+  };
+  const handleDelShop = (e) => {
+    const shopId = parseInt(e.target.getAttribute('shop'));
+    dispatch(deleteLocalShop(shopId));
+  };
 
   const getBestShop = () => {
     if (Object.keys(bestPrices).length === 0) return null;
@@ -123,7 +148,33 @@ const Home = () => {
       </form>
     </div>
   );
-
+  const shopForm = (
+    <div className="shopFormContainer">
+      <form className="shopForm" onSubmit={handleAddShopSubmit}>
+        <div className="shopForm__row">
+          <input className="shopForm__input" type="text" name="shop-name" required />
+        <button className="shopForm__button" type="submit">Add Shop</button>
+        </div>
+      </form>
+    </div>
+  );
+  const shopsList = (
+    <div className="shopListContainer" style={showShops ? { display: 'flex' } : { display: 'none' }}>
+      <div className="shopsView">
+        <FontAwesomeIcon icon={faCircleXmark} onClick={() => setShowShops(false)} />
+        <ul className="shopList">
+          {shops.map((shop) => (
+            <div key={`shop-${shop.id}`} className="price" onClick={handleModShopClick} onBlur={handleModShopSubmit} shop={shop.id}>
+              {shop.name}
+              {' '}
+              <FontAwesomeIcon icon={faTrash} onClick={handleDelShop} shop={shop.id} />
+            </div>
+          ))}
+          {shopForm}
+        </ul>
+      </div>
+    </div>
+  );
   const page = (
     <div>
       <div className="titleBar">
@@ -235,6 +286,7 @@ const Home = () => {
         </div>
       </div>
       {itemForm}
+      {shopsList}
       <footer>
         <div className='button'>Save</div>
         <div className='button'>Lists</div>
@@ -243,7 +295,7 @@ const Home = () => {
             <FontAwesomeIcon className='plus' icon={faPlus} />
           </div>
         </div>
-        <div className='button'>Shops</div>
+        <div className='button' onClick={() => setShowShops(true)}>Shops</div>
         <div className='button'>Items</div>
       </footer>
     </div>
