@@ -123,7 +123,6 @@ const Home = () => {
       </form>
     </div>
   );
-
   const shopsList = (
     <div className="shopCol">
       {shops.map((shop) => (
@@ -131,7 +130,6 @@ const Home = () => {
       ))}
     </div>
   );
-
   const page = (
     <div>
       <div className="titleBar">
