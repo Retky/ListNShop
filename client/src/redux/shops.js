@@ -2,12 +2,18 @@ const FETCH_LOCAL_SHOPS = 'FETCH_LOCAL_SHOPS';
 const ADD_LOCAL_SHOP = 'ADD_LOCAL_SHOP';
 const UPDATE_LOCAL_SHOP = 'UPDATE_LOCAL_SHOP';
 const DELETE_LOCAL_SHOP = 'DELETE_LOCAL_SHOP';
-const initialState = [
-  { id: 0, name: 'Default' },
-];
+const initialState = {
+  nextId: 2,
+  shops: [
+    { id: 1, name: 'Default' },
+  ]
+};
 
 export const fetchLocalShops = () => {
-  const shops = JSON.parse(localStorage.getItem('shops')) || initialState;
+  const fetch = JSON.parse(localStorage.getItem('shops')) || initialState;
+  console.log(fetch);
+  const shops = fetch.shops;
+  console.log(shops);
   return {
     type: FETCH_LOCAL_SHOPS,
     payload: shops,
@@ -43,7 +49,7 @@ export const deleteLocalShop = (id) => {
   };
 };
 
-const reducer = (state = initialState, action) => {
+const reducer = (state = initialState.shops, action) => {
   switch (action.type) {
     case FETCH_LOCAL_SHOPS:
       return action.payload;
