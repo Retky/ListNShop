@@ -11,18 +11,22 @@ const initialState = {
 
 export const fetchLocalShops = () => {
   const fetch = JSON.parse(localStorage.getItem('shops')) || initialState;
-  console.log(fetch);
   const shops = fetch.shops;
-  console.log(shops);
   return {
     type: FETCH_LOCAL_SHOPS,
     payload: shops,
   };
 };
-export const addLocalShop = (shop) => {
-  const shops = JSON.parse(localStorage.getItem('shops')) || initialState;
-  shops.push(shop);
-  localStorage.setItem('shops', JSON.stringify(shops));
+export const addLocalShop = (shopName) => {
+  const fetch = JSON.parse(localStorage.getItem('shops')) || initialState;
+  const shops = fetch.shops;
+  const newShop = {
+    id: fetch.nextId,
+    name: shopName,
+  };
+  fetch.nextId++;
+  shops.push(newShop);
+  localStorage.setItem('shops', JSON.stringify(fetch));
   return {
     type: ADD_LOCAL_SHOP,
     payload: shops,

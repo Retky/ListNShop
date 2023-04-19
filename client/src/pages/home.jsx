@@ -86,12 +86,7 @@ const Home = () => {
   const handleAddShopSubmit = (e) => {
     e.preventDefault();
     const shopName = e.target['shop-name'].value;
-    let shopId = shops.length;
-    const newShop = {
-      id: shopId,
-      name: shopName
-    };
-    dispatch(addLocalShop(newShop));
+    dispatch(addLocalShop(shopName));
     e.target.reset();
     setShowShops(false);
   };
