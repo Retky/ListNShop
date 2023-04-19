@@ -99,7 +99,7 @@ const Home = () => {
     e.target.setAttribute('contentEditable', true);
   };
   const handleDelShop = (e) => {
-    const shopId = parseInt(e.target.getAttribute('shop'));
+    const shopId = parseInt(e.target.parentNode.getAttribute('shop'));
     dispatch(deleteLocalShop(shopId));
   };
 
