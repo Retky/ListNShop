@@ -43,10 +43,11 @@ export const updateLocalShop = (shopName, id) => {
   };
 };
 export const deleteLocalShop = (id) => {
-  const shops = JSON.parse(localStorage.getItem('shops')) || initialState;
+  const fetch = JSON.parse(localStorage.getItem('shops')) || initialState;
+  const shops = fetch.shops;
   const shop = shops.find((shop) => shop.id === id);
   shops.splice(shops.indexOf(shop), 1);
-  localStorage.setItem('shops', JSON.stringify(shops));
+  localStorage.setItem('shops', JSON.stringify(fetch));
   return {
     type: DELETE_LOCAL_SHOP,
     payload: shops,
