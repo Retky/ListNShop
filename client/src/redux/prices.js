@@ -8,7 +8,6 @@ const initialState = {
 
 export const fetchLocalPrices = () => {
   const fetch = JSON.parse(localStorage.getItem('prices')) || initialState;
-  const prices = fetch.prices;
   localStorage.setItem('prices', JSON.stringify(fetch));
   return {
     type: FETCH_LOCAL_PRICES,

@@ -11,7 +11,6 @@ const initialState = {
 
 export const fetchLocalShops = () => {
   const fetch = JSON.parse(localStorage.getItem('shops')) || initialState;
-  const shops = fetch.shops;
   localStorage.setItem('shops', JSON.stringify(fetch));
   return {
     type: FETCH_LOCAL_SHOPS,
