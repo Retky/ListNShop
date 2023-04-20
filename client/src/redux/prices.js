@@ -1,16 +1,18 @@
 const FETCH_LOCAL_PRICES = 'FETCH_LOCAL_PRICES';
 const UPDATE_LOCAL_PRICE = 'UPDATE_LOCAL_PRICE';
 const ADD_LOCAL_PRICE = 'ADD_LOCAL_PRICE';
-const initialState = [];
+const initialState = {
+  nextId: 1,
+  prices: [],
+};
 
 export const fetchLocalPrices = () => {
-  const prices = JSON.parse(localStorage.getItem('prices')) || initialState;
-  if (prices.length === 0) {
-    localStorage.setItem('prices', JSON.stringify(initialState));
-  }
+  const fetch = JSON.parse(localStorage.getItem('prices')) || initialState;
+  const prices = fetch.prices;
+  localStorage.setItem('prices', JSON.stringify(fetch));
   return {
     type: FETCH_LOCAL_PRICES,
-    payload: prices,
+    payload: fetch.prices,
   };
 };
 
