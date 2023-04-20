@@ -14,23 +14,26 @@ export const fetchLocalPrices = () => {
     payload: fetch.prices,
   };
 };
-
 export const updateLocalPrice = (price, itemId, shopId) => {
-  const prices = JSON.parse(localStorage.getItem('prices')) || initialState;
-  const newPrice = { price, shop_id: shopId, item_id: itemId };
+  const fetch = JSON.parse(localStorage.getItem('prices')) || initialState;
+  const prices = fetch.prices;
   if (prices.find((p) => p.item_id === itemId && p.shop_id === shopId)) {
-    const priceId = prices.find((p) => p.item_id === itemId && p.shop_id === shopId).id;
-    newPrice.id = priceId;
-    const index = prices.findIndex((p) => p.id === priceId);
-    prices[index] = newPrice;
+    const changedPrice = prices.find((p) => p.item_id === itemId && p.shop_id === shopId);
+    changedPrice.price = price;
   } else {
-    newPrice.id = prices.length + 1;
+    const newPrice = {
+      id: fetch.nextId,
+      item_id: itemId,
+      shop_id: shopId,
+      price,
+    };
     prices.push(newPrice);
+    fetch.nextId++;
   }
-  localStorage.setItem('prices', JSON.stringify(prices));
+  localStorage.setItem('prices', JSON.stringify(fetch));
   return {
     type: UPDATE_LOCAL_PRICE,
-    payload: prices,
+    payload: fetch.prices,
   };
 };
 
