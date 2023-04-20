@@ -36,21 +36,23 @@ export const updateLocalPrice = (price, itemId, shopId) => {
     payload: fetch.prices,
   };
 };
-
 export const addLocalPrice = (newPrices) => {
-  const prices = JSON.parse(localStorage.getItem('prices'));
+  const fetch = JSON.parse(localStorage.getItem('prices')) || initialState;
+  const prices = fetch.prices;
   newPrices.forEach((newPrice) => {
-    let newId = prices.length;
-    while (prices.find((p) => p.id === newId)) {
-      newId++;
-    }
-    newPrice.id = newId;
-    prices.push(newPrice);
+    const price = {
+      id: fetch.nextId,
+      item_id: newPrice.item_id,
+      shop_id: newPrice.shop_id,
+      price: newPrice.price,
+    };
+    prices.push(price);
+    fetch.nextId++;
   });
-  localStorage.setItem('prices', JSON.stringify(prices));
+  localStorage.setItem('prices', JSON.stringify(fetch));
   return {
     type: ADD_LOCAL_PRICE,
-    payload: prices,
+    payload: fetch.prices,
   };
 };
 

@@ -42,10 +42,11 @@ const Home = () => {
     const newQuantity = parseFloat(event.target.value);
     dispatch(updateLocalItemQuantity(itemId, newQuantity));
   };
-  const handleSetPrice = (event) => {
-    const itemId = parseInt(event.target.getAttribute('item'));
-    const shopId = parseInt(event.target.getAttribute('shop'));
-    const newPrice = parseFloat(event.target.value).toFixed(2);
+  const handleSetPrice = (e) => {
+    const itemId = parseInt(e.target.getAttribute('item'));
+    const shopId = parseInt(e.target.getAttribute('shop'));
+    const newPrice = parseFloat(e.target.value).toFixed(2);
+    e.target.value = newPrice;
     dispatch(updateLocalPrice( newPrice, itemId, shopId));
   };
   const handlePriceChange = () => {};
@@ -71,7 +72,7 @@ const Home = () => {
     };
     const newPrices = [];
     shops.forEach((shop) => {
-      const price = e.target[`item-price-${shop.id}`].value;
+      const price = Number(e.target[`item-price-${shop.id}`].value).toFixed(2);
       newPrices.push({
         price,
         item_id: itemId,
