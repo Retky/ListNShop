@@ -56,7 +56,7 @@ export const addLocalPrice = (newPrices) => {
   };
 };
 
-const reducer = (state = initialState, action) => {
+const reducer = (state = initialState.prices, action) => {
   switch (action.type) {
     case FETCH_LOCAL_PRICES:
       return action.payload;

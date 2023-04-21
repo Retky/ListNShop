@@ -3,16 +3,17 @@ const UPDATE_LOCAL_ITEM_QUANTITY = 'UPDATE_LOCAL_ITEM_QUANTITY';
 const INC_LOCAL_ITEM_QUANTITY = 'INC_LOCAL_ITEM_QUANTITY';
 const DEC_LOCAL_ITEM_QUANTITY = 'DEC_LOCAL_ITEM_QUANTITY';
 const ADD_LOCAL_ITEM = 'ADD_LOCAL_ITEM';
-const initialState = [];
+const initialState = {
+  nextId: 1,
+  items: [],
+};
 
 export const fetchLocalItems = () => {
-  const items = JSON.parse(localStorage.getItem('items')) || initialState;
-  if (items.length === 0) {
-    localStorage.setItem('items', JSON.stringify(initialState));
-  }
+  const fetch = JSON.parse(localStorage.getItem('items')) || initialState;
+    localStorage.setItem('items', JSON.stringify(fetch));
   return {
     type: FETCH_LOCAL_ITEMS,
-    payload: items,
+    payload: fetch.items,
   };
 };
 
@@ -59,7 +60,7 @@ export const addLocalItem = (item) => {
   };
 };
 
-const reducer = (state = initialState, action) => {
+const reducer = (state = initialState.items, action) => {
   switch (action.type) {
     case FETCH_LOCAL_ITEMS:
       return action.payload;

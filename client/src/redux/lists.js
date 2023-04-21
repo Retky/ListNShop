@@ -14,7 +14,7 @@ export const fetchLocalLists = () => {
   };
 };
 
-const reducer = (state = initialState, action) => {
+const reducer = (state = initialState.lists, action) => {
   switch (action.type) {
     case FETCH_LOCAL_LISTS:
       return action.payload;
