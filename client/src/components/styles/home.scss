@@ -1,0 +1,266 @@
+@import './variables.scss';
+
+.titleBar {
+  background-color: $accent-color;
+  padding: 5px;
+  border-radius: 0 0 25px 25px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  z-index: 5;
+  position: fixed;
+  width: calc(100vw - 50px);
+  left: 50%;
+  transform: translateX(-50%);
+  margin-top: 100px;
+}
+
+.listTitle {
+  margin: 0;
+  font-size: 18px;
+  text-align: center;
+  color: #fff;
+}
+
+.shoppingList {
+  position: relative;
+  z-index: 4;
+  list-style: none;
+  margin: 100px 0 0 0;
+  padding: 0;
+  overflow: auto;
+  
+  li {
+    &:nth-child(odd) {
+      background-color: $primary-color;
+      .price {
+        background-color: $secondary-grey;
+        width: 100%;
+        text-align: center;
+        font-size: 15px;
+        border-left: #e0e0e0 2px groove;
+      }
+    }
+    &:nth-child(even) {
+      background-color: $secondary-color;
+      .price {
+        background-color: $primary-grey;
+        width: 100%;
+        text-align: center;
+        font-size: 15px;
+        border-left: #e0e0e0 2px groove;
+      }
+    }
+    &:last-child {
+      box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+      border-radius: 0px 0px 10px 10px;
+    }
+  }
+}
+
+.notPrice {
+  color: red;
+}
+
+.bestPrice {
+  color: green;
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+}
+
+.itemCol {
+  width: 40%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.totalRow {
+  box-sizing: border-box;
+  padding-right: 10px;
+  justify-content: end;
+}
+
+.shopCol {
+  width: 60%;
+  background-color: $secondary-grey;
+  flex-grow: 1;
+  display: flex;
+  justify-content: space-between;
+}
+
+.titles {
+  padding-top: 31px;
+}
+
+.unitPrice {
+  box-sizing: border-box;
+  border: none;
+  background-color: transparent;
+  width: 80%;
+  text-align: center;
+  -webkit-appearance: none;
+  -moz-appearance:textfield;
+}
+
+.totalPrice {
+  font-weight: bold;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+}
+
+.itemMeasure {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.itemUnit {
+  font-size: 13px;
+  width: 80%;
+}
+
+.unity-bar {
+  display: flex;
+  align-items: center;
+  max-width: 100px;
+  margin: 0 auto;
+  font-size: 14px;
+  height: 15px;
+}
+
+.unity-bar__button {
+  height: 15px;
+  width: 12px;
+  border: none;
+  background-color: #3A8290;
+  color: #fff;
+  font-size: 10px;
+
+  &:nth-child(1) {
+    border-radius: 50% 0 0 50%;
+  }
+
+  &:nth-last-child(1) {
+    border-radius: 0 50% 50% 0;
+  }
+}
+
+.unity-bar__input {
+  height: 13px;
+  width: 100%;
+  flex: 1;
+  text-align: center;
+  border: none;
+  font-size: 14px;
+  -webkit-appearance: none;
+  -moz-appearance:textfield;
+}
+
+.bestBarContainer {
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 100px;
+}
+
+.bestBar {
+  background-color: $secondary-grey;
+  padding: 5px;
+  border-radius: 0 0 25px 25px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  z-index: 3;
+  width: calc(100vw - 50px);
+
+  .bestTotal {
+    font-size: 16px;
+    color: #fff;
+    text-align: center;
+    margin: 0;
+  }
+}
+
+footer {
+  background-color: $primary-color;
+  width: 100%;
+  height: 80px;
+  box-sizing: border-box;
+  padding: 0 20px;
+  border-radius: 20px 20px 0 0;
+  display: flex;
+  position: fixed;
+  bottom: 0;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 6;
+
+  .button {
+    display: flex;
+    cursor: pointer;
+    @include box-button($button-color);
+  }
+
+  .addBtn {
+    position: absolute;
+    left: 50%;
+    top: -25px;
+    transform: translateX(-50%);
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    background-color: $accent-color;
+    display: grid;
+    place-items: center;
+
+    &:hover {
+      cursor: pointer;
+    }
+
+    .plus {
+      font-size: 35px;
+      color: #fff;
+    }
+  }
+}
+
+.itemFormContainer {
+  position: fixed;
+  top: 0;
+  background-color: #00000025;
+  backdrop-filter: blur(5px);
+  width: 100vw;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+  z-index: 7;
+}
+
+.shopsView {
+  background-color: #e0e0e0;
+  border-radius: 10px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.shopListContainer {
+  position: fixed;
+  top: 0;
+  background-color: #00000025;
+  backdrop-filter: blur(5px);
+  width: 100vw;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+  z-index: 7;
+}
+
+.shopList {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}

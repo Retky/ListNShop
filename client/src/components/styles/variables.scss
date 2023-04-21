@@ -1,0 +1,15 @@
+$primary-color: #74BAC6;
+$secondary-color: #9DDFE9;
+$accent-color: #3A8290;
+$button-color: #6AB0BC;
+$primary-grey: #EAEAEA;
+$secondary-grey: #BABABA;
+
+@mixin box-button($bg-color) {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background-color: $bg-color;
+  display: grid;
+  place-items: center;
+}
