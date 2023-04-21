@@ -5,7 +5,7 @@ import { faPlus, faCircleXmark, faTrash } from '@fortawesome/free-solid-svg-icon
 
 import { fetchLocalLists } from '../redux/lists';
 import { fetchLocalShops, addLocalShop, updateLocalShop, deleteLocalShop } from '../redux/shops';
-import { fetchLocalItems, updateLocalItemQuantity, incLocalItemQuantity, decLocalItemQuantity, addLocalItem } from '../redux/items';
+import { fetchLocalItems, updateLocalItemQuantity, incLocalItemQuantity, decLocalItemQuantity, addLocalItem, deleteLocalItem } from '../redux/items';
 import { fetchLocalPrices, updateLocalPrice, addLocalPrice } from '../redux/prices';
 import '../components/styles/home.scss';
 
@@ -71,6 +71,10 @@ const Home = () => {
     dispatch(addLocalPrice(newPrices));
     e.target.reset();
     setShowForm(false);
+  };
+  const handleDelItem = (e) => {
+    const itemId = parseInt(e.target.parentNode.getAttribute('item'));
+    dispatch(deleteLocalItem(itemId));
   };
   const handleAddShopSubmit = (e) => {
     e.preventDefault();
@@ -192,6 +196,7 @@ const Home = () => {
                   </div>
                   <div className="itemInfo">
                     <div className="itemName">{item.name}</div>
+                    <FontAwesomeIcon icon={faTrash} onClick={handleDelItem} item={item.id} />
                     <div className="itemMeasure">
                       <div className="itemQuantity">
                         <div className="unity-bar">
