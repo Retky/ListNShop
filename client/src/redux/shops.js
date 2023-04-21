@@ -2,48 +2,60 @@ const FETCH_LOCAL_SHOPS = 'FETCH_LOCAL_SHOPS';
 const ADD_LOCAL_SHOP = 'ADD_LOCAL_SHOP';
 const UPDATE_LOCAL_SHOP = 'UPDATE_LOCAL_SHOP';
 const DELETE_LOCAL_SHOP = 'DELETE_LOCAL_SHOP';
-const initialState = [
-  { id: 0, name: 'Default' },
-];
+const initialState = {
+  nextId: 2,
+  shops: [
+    { id: 1, name: 'Default' },
+  ]
+};
 
 export const fetchLocalShops = () => {
-  const shops = JSON.parse(localStorage.getItem('shops')) || initialState;
+  const fetch = JSON.parse(localStorage.getItem('shops')) || initialState;
+  localStorage.setItem('shops', JSON.stringify(fetch));
   return {
     type: FETCH_LOCAL_SHOPS,
-    payload: shops,
+    payload: fetch.shops,
   };
 };
-export const addLocalShop = (shop) => {
-  const shops = JSON.parse(localStorage.getItem('shops')) || initialState;
-  shops.push(shop);
-  localStorage.setItem('shops', JSON.stringify(shops));
+export const addLocalShop = (shopName) => {
+  const fetch = JSON.parse(localStorage.getItem('shops')) || initialState;
+  const shops = fetch.shops;
+  const newShop = {
+    id: fetch.nextId,
+    name: shopName,
+  };
+  fetch.nextId++;
+  shops.push(newShop);
+  localStorage.setItem('shops', JSON.stringify(fetch));
   return {
     type: ADD_LOCAL_SHOP,
-    payload: shops,
+    payload: fetch.shops,
   };
 };
 export const updateLocalShop = (shopName, id) => {
-  const shops = JSON.parse(localStorage.getItem('shops')) || initialState;
+  const fetch = JSON.parse(localStorage.getItem('shops')) || initialState;
+  const shops = fetch.shops;
   const shop = shops.find((shop) => shop.id === id);
   shop.name = shopName;
-  localStorage.setItem('shops', JSON.stringify(shops));
+  localStorage.setItem('shops', JSON.stringify(fetch));
   return {
     type: UPDATE_LOCAL_SHOP,
-    payload: shops,
+    payload: fetch.shops,
   };
 };
 export const deleteLocalShop = (id) => {
-  const shops = JSON.parse(localStorage.getItem('shops')) || initialState;
-  const shop = shops.find((shop) => shop.id === id);
-  shops.splice(shops.indexOf(shop), 1);
-  localStorage.setItem('shops', JSON.stringify(shops));
+  const fetch = JSON.parse(localStorage.getItem('shops')) || initialState;
+  const shops = fetch.shops;
+  const newShops = shops.filter((shop) => shop.id !== id);
+  fetch.shops = newShops;
+  localStorage.setItem('shops', JSON.stringify(fetch));
   return {
     type: DELETE_LOCAL_SHOP,
-    payload: shops,
+    payload: fetch.shops,
   };
 };
 
-const reducer = (state = initialState, action) => {
+const reducer = (state = initialState.shops, action) => {
   switch (action.type) {
     case FETCH_LOCAL_SHOPS:
       return action.payload;

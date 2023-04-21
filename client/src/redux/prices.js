@@ -1,56 +1,62 @@
 const FETCH_LOCAL_PRICES = 'FETCH_LOCAL_PRICES';
 const UPDATE_LOCAL_PRICE = 'UPDATE_LOCAL_PRICE';
 const ADD_LOCAL_PRICE = 'ADD_LOCAL_PRICE';
-const initialState = [];
+const initialState = {
+  nextId: 1,
+  prices: [],
+};
 
 export const fetchLocalPrices = () => {
-  const prices = JSON.parse(localStorage.getItem('prices')) || initialState;
-  if (prices.length === 0) {
-    localStorage.setItem('prices', JSON.stringify(initialState));
-  }
+  const fetch = JSON.parse(localStorage.getItem('prices')) || initialState;
+  localStorage.setItem('prices', JSON.stringify(fetch));
   return {
     type: FETCH_LOCAL_PRICES,
-    payload: prices,
+    payload: fetch.prices,
   };
 };
-
 export const updateLocalPrice = (price, itemId, shopId) => {
-  const prices = JSON.parse(localStorage.getItem('prices')) || initialState;
-  const newPrice = { price, shop_id: shopId, item_id: itemId };
+  const fetch = JSON.parse(localStorage.getItem('prices')) || initialState;
+  const prices = fetch.prices;
   if (prices.find((p) => p.item_id === itemId && p.shop_id === shopId)) {
-    const priceId = prices.find((p) => p.item_id === itemId && p.shop_id === shopId).id;
-    newPrice.id = priceId;
-    const index = prices.findIndex((p) => p.id === priceId);
-    prices[index] = newPrice;
+    const changedPrice = prices.find((p) => p.item_id === itemId && p.shop_id === shopId);
+    changedPrice.price = price;
   } else {
-    newPrice.id = prices.length + 1;
+    const newPrice = {
+      id: fetch.nextId,
+      item_id: itemId,
+      shop_id: shopId,
+      price,
+    };
     prices.push(newPrice);
+    fetch.nextId++;
   }
-  localStorage.setItem('prices', JSON.stringify(prices));
+  localStorage.setItem('prices', JSON.stringify(fetch));
   return {
     type: UPDATE_LOCAL_PRICE,
-    payload: prices,
+    payload: fetch.prices,
   };
 };
-
 export const addLocalPrice = (newPrices) => {
-  const prices = JSON.parse(localStorage.getItem('prices'));
+  const fetch = JSON.parse(localStorage.getItem('prices')) || initialState;
+  const prices = fetch.prices;
   newPrices.forEach((newPrice) => {
-    let newId = prices.length;
-    while (prices.find((p) => p.id === newId)) {
-      newId++;
-    }
-    newPrice.id = newId;
-    prices.push(newPrice);
+    const price = {
+      id: fetch.nextId,
+      item_id: newPrice.item_id,
+      shop_id: newPrice.shop_id,
+      price: newPrice.price,
+    };
+    prices.push(price);
+    fetch.nextId++;
   });
-  localStorage.setItem('prices', JSON.stringify(prices));
+  localStorage.setItem('prices', JSON.stringify(fetch));
   return {
     type: ADD_LOCAL_PRICE,
-    payload: prices,
+    payload: fetch.prices,
   };
 };
 
-const reducer = (state = initialState, action) => {
+const reducer = (state = initialState.prices, action) => {
   switch (action.type) {
     case FETCH_LOCAL_PRICES:
       return action.payload;

@@ -5,7 +5,7 @@ import { faPlus, faCircleXmark, faTrash } from '@fortawesome/free-solid-svg-icon
 
 import { fetchLocalLists } from '../redux/lists';
 import { fetchLocalShops, addLocalShop, updateLocalShop, deleteLocalShop } from '../redux/shops';
-import { fetchLocalItems, updateLocalItemQuantity, incLocalItemQuantity, decLocalItemQuantity, addLocalItem } from '../redux/items';
+import { fetchLocalItems, updateLocalItemQuantity, incLocalItemQuantity, decLocalItemQuantity, addLocalItem, deleteLocalItem } from '../redux/items';
 import { fetchLocalPrices, updateLocalPrice, addLocalPrice } from '../redux/prices';
 import '../components/styles/home.scss';
 
@@ -42,10 +42,11 @@ const Home = () => {
     const newQuantity = parseFloat(event.target.value);
     dispatch(updateLocalItemQuantity(itemId, newQuantity));
   };
-  const handleSetPrice = (event) => {
-    const itemId = parseInt(event.target.getAttribute('item'));
-    const shopId = parseInt(event.target.getAttribute('shop'));
-    const newPrice = parseFloat(event.target.value).toFixed(2);
+  const handleSetPrice = (e) => {
+    const itemId = parseInt(e.target.getAttribute('item'));
+    const shopId = parseInt(e.target.getAttribute('shop'));
+    const newPrice = parseFloat(e.target.value).toFixed(2);
+    e.target.value = newPrice;
     dispatch(updateLocalPrice( newPrice, itemId, shopId));
   };
   const handlePriceChange = () => {};
@@ -57,41 +58,28 @@ const Home = () => {
     const itemName = e.target['item-name'].value;
     const itemQuantity = e.target['item-quantity'].value;
     const itemUnit = e.target['item-unit'].value;
-    let itemId = listItems.length;
-    while (listItems.find((item) => item.id === itemId)) {
-      itemId += 1; 
-    }
-    const newItem = {
-      id: itemId,
-      checked: false,
-      name: itemName,
-      quantity: itemQuantity,
-      unit: itemUnit,
-      list_id: quickList.id,
-    };
+    const item = dispatch(addLocalItem(itemName, itemQuantity, itemUnit));
     const newPrices = [];
     shops.forEach((shop) => {
-      const price = e.target[`item-price-${shop.id}`].value;
+      const price = Number(e.target[`item-price-${shop.id}`].value).toFixed(2);
       newPrices.push({
         price,
-        item_id: itemId,
+        item_id: item.itemId,
         shop_id: shop.id,
       });
     });
     dispatch(addLocalPrice(newPrices));
-    dispatch(addLocalItem(newItem, newPrices));
     e.target.reset();
     setShowForm(false);
+  };
+  const handleDelItem = (e) => {
+    const itemId = parseInt(e.target.parentNode.getAttribute('item'));
+    dispatch(deleteLocalItem(itemId));
   };
   const handleAddShopSubmit = (e) => {
     e.preventDefault();
     const shopName = e.target['shop-name'].value;
-    let shopId = shops.length;
-    const newShop = {
-      id: shopId,
-      name: shopName
-    };
-    dispatch(addLocalShop(newShop));
+    dispatch(addLocalShop(shopName));
     e.target.reset();
     setShowShops(false);
   };
@@ -104,7 +92,7 @@ const Home = () => {
     e.target.setAttribute('contentEditable', true);
   };
   const handleDelShop = (e) => {
-    const shopId = parseInt(e.target.getAttribute('shop'));
+    const shopId = parseInt(e.target.parentNode.getAttribute('shop'));
     dispatch(deleteLocalShop(shopId));
   };
 
@@ -208,6 +196,7 @@ const Home = () => {
                   </div>
                   <div className="itemInfo">
                     <div className="itemName">{item.name}</div>
+                    <FontAwesomeIcon icon={faTrash} onClick={handleDelItem} item={item.id} />
                     <div className="itemMeasure">
                       <div className="itemQuantity">
                         <div className="unity-bar">
