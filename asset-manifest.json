@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/ListNShop/static/css/main.38deae07.css",
+    "main.js": "/ListNShop/static/js/main.89e12332.js",
+    "index.html": "/ListNShop/index.html",
+    "main.38deae07.css.map": "/ListNShop/static/css/main.38deae07.css.map",
+    "main.89e12332.js.map": "/ListNShop/static/js/main.89e12332.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.38deae07.css",
+    "static/js/main.89e12332.js"
+  ]
+}
