@@ -18,35 +18,38 @@ export const fetchLocalItems = () => {
 };
 
 export const updateLocalItemQuantity = (itemId, quantity) => {
-  const items = JSON.parse(localStorage.getItem('items')) || initialState;
+  const fetch = JSON.parse(localStorage.getItem('items')) || initialState;
+  const items = fetch.items;
   const item = items.find((item) => item.id === itemId);
   item.quantity = quantity;
-  localStorage.setItem('items', JSON.stringify(items));
+  localStorage.setItem('items', JSON.stringify(fetch));
   return {
     type: UPDATE_LOCAL_ITEM_QUANTITY,
-    payload: items,
+    payload: fetch.items,
   };
 };
 
 export const incLocalItemQuantity = (itemId) => {
-  const items = JSON.parse(localStorage.getItem('items')) || initialState;
+  const fetch = JSON.parse(localStorage.getItem('items')) || initialState;
+  const items = fetch.items;
   const item = items.find((item) => item.id === itemId);
   item.quantity++;
-  localStorage.setItem('items', JSON.stringify(items));
+  localStorage.setItem('items', JSON.stringify(fetch));
   return {
     type: INC_LOCAL_ITEM_QUANTITY,
-    payload: items,
+    payload: fetch.items,
   };
 };
 
 export const decLocalItemQuantity = (itemId) => {
-  const items = JSON.parse(localStorage.getItem('items')) || initialState;
+  const fetch = JSON.parse(localStorage.getItem('items')) || initialState;
+  const items = fetch.items;
   const item = items.find((item) => item.id === itemId);
   item.quantity--;
-  localStorage.setItem('items', JSON.stringify(items));
+  localStorage.setItem('items', JSON.stringify(fetch));
   return {
     type: DEC_LOCAL_ITEM_QUANTITY,
-    payload: items,
+    payload: fetch.items,
   };
 };
 
