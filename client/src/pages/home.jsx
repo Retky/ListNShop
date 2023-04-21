@@ -58,29 +58,17 @@ const Home = () => {
     const itemName = e.target['item-name'].value;
     const itemQuantity = e.target['item-quantity'].value;
     const itemUnit = e.target['item-unit'].value;
-    let itemId = listItems.length;
-    while (listItems.find((item) => item.id === itemId)) {
-      itemId += 1; 
-    }
-    const newItem = {
-      id: itemId,
-      checked: false,
-      name: itemName,
-      quantity: itemQuantity,
-      unit: itemUnit,
-      list_id: quickList.id,
-    };
+    const item = dispatch(addLocalItem(itemName, itemQuantity, itemUnit));
     const newPrices = [];
     shops.forEach((shop) => {
       const price = Number(e.target[`item-price-${shop.id}`].value).toFixed(2);
       newPrices.push({
         price,
-        item_id: itemId,
+        item_id: item.itemId,
         shop_id: shop.id,
       });
     });
     dispatch(addLocalPrice(newPrices));
-    dispatch(addLocalItem(newItem, newPrices));
     e.target.reset();
     setShowForm(false);
   };
