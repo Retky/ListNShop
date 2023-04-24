@@ -56,6 +56,14 @@ export const addLocalPrice = (newPrices) => {
   };
 };
 
+export const deleteLocalItemPrices = (itemId) => {
+  const fetch = JSON.parse(localStorage.getItem('prices')) || initialState;
+  const prices = fetch.prices;
+  const newPrices = prices.filter((price) => price.item_id !== itemId);
+  fetch.prices = newPrices;
+  localStorage.setItem('prices', JSON.stringify(fetch));
+};
+
 const reducer = (state = initialState.prices, action) => {
   switch (action.type) {
     case FETCH_LOCAL_PRICES:
