@@ -56,11 +56,20 @@ export const addLocalPrice = (newPrices) => {
   };
 };
 
-export const deleteLocalItemPrices = (itemId) => {
+export const deleteLocalPrices = (itemId, shopId) => {
+  console.log('itemId', itemId, 'shopId', shopId);
   const fetch = JSON.parse(localStorage.getItem('prices')) || initialState;
-  const prices = fetch.prices;
-  const newPrices = prices.filter((price) => price.item_id !== itemId);
-  fetch.prices = newPrices;
+  let prices = fetch.prices;
+
+  if (itemId !== undefined) {
+    const newPrices = prices.filter((price) => price.item_id !== itemId);
+    prices = newPrices;
+  } else if (shopId !== undefined) {
+    const newPrices = prices.filter((price) => price.shop_id !== shopId);
+    prices = newPrices;
+  }
+
+  fetch.prices = prices;
   localStorage.setItem('prices', JSON.stringify(fetch));
 };
 

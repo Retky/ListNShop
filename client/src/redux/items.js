@@ -1,4 +1,4 @@
-import { deleteLocalItemPrices } from './prices';
+import { deleteLocalPrices } from './prices';
 
 const FETCH_LOCAL_ITEMS = 'FETCH_LOCAL_ITEMS';
 const UPDATE_LOCAL_ITEM_QUANTITY = 'UPDATE_LOCAL_ITEM_QUANTITY';
@@ -77,7 +77,7 @@ export const deleteLocalItem = (itemId) => {
   const index = items.indexOf(item);
   items.splice(index, 1);
   localStorage.setItem('items', JSON.stringify(fetch));
-  deleteLocalItemPrices(itemId);
+  deleteLocalPrices(itemId);
   return {
     type: DELETE_LOCAL_ITEM,
     payload: items,
