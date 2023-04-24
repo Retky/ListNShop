@@ -1,3 +1,5 @@
+import { deleteLocalPrices } from './prices';
+
 const FETCH_LOCAL_SHOPS = 'FETCH_LOCAL_SHOPS';
 const ADD_LOCAL_SHOP = 'ADD_LOCAL_SHOP';
 const UPDATE_LOCAL_SHOP = 'UPDATE_LOCAL_SHOP';
@@ -49,6 +51,7 @@ export const deleteLocalShop = (id) => {
   const newShops = shops.filter((shop) => shop.id !== id);
   fetch.shops = newShops;
   localStorage.setItem('shops', JSON.stringify(fetch));
+  deleteLocalPrices(undefined, id);
   return {
     type: DELETE_LOCAL_SHOP,
     payload: fetch.shops,
