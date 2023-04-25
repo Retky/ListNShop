@@ -195,8 +195,10 @@ const Home = () => {
                     <input type="checkbox" />
                   </div>
                   <div className="itemInfo">
-                    <div className="itemName">{item.name}</div>
-                    <FontAwesomeIcon icon={faTrash} onClick={handleDelItem} item={item.id} />
+                    <div className="itemName">
+                      {item.name}
+                      <FontAwesomeIcon icon={faTrash} onClick={handleDelItem} item={item.id} />
+                    </div>
                     <div className="itemMeasure">
                       <div className="itemQuantity">
                         <div className="unity-bar">
