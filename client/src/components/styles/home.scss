@@ -37,6 +37,8 @@
         text-align: center;
         font-size: 15px;
         border-left: #e0e0e0 2px groove;
+        display: grid;
+        place-items: center;
       }
     }
     &:nth-child(even) {
@@ -47,6 +49,8 @@
         text-align: center;
         font-size: 15px;
         border-left: #e0e0e0 2px groove;
+        display: grid;
+        place-items: center;
       }
     }
     &:last-child {
