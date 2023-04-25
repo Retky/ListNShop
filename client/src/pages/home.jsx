@@ -196,7 +196,7 @@ const Home = () => {
                   </div>
                   <div className="itemInfo">
                     <div className="itemName">
-                      {item.name}
+                      <p>{item.name}</p>
                       <FontAwesomeIcon icon={faTrash} onClick={handleDelItem} item={item.id} />
                     </div>
                     <div className="itemMeasure">
