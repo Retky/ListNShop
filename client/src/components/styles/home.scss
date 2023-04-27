@@ -255,6 +255,13 @@ footer {
   z-index: 7;
 }
 
+.itemForm {
+  background-color: $secondary-color;
+  box-sizing:border-box;
+  width: 80%;
+  padding: 20px;
+}
+
 .shopsView {
   background-color: #e0e0e0;
   border-radius: 10px;
