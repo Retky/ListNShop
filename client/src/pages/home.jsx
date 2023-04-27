@@ -110,7 +110,9 @@ const Home = () => {
   const itemForm = (
     <div className="itemFormContainer" style={showForm ? { display: 'flex' } : { display: 'none' }}>
       <form className="itemForm" onSubmit={handleAddItemSubmit}>
-        <FontAwesomeIcon icon={faCircleXmark} onClick={() => setShowForm(false)} />
+        <div className="closeItemBtn">
+          <FontAwesomeIcon icon={faCircleXmark} onClick={() => setShowForm(false)} />
+        </div>
         <div className="itemForm__row">
           <label className="itemForm__label" htmlFor="item-name">Item Name</label>
           <input className="itemForm__input" type="text" name="item-name" required />
@@ -124,14 +126,16 @@ const Home = () => {
           <input className="itemForm__input" type="text" name="item-unit" required />
         </div>
         <div className="itemForm__row">
-          <label className="itemForm__label" htmlFor="item-price">Prices</label>
+          <h3 className="itemForm__label" htmlFor="item-price">Prices</h3>
           {shops.map((shop) => (
             <div key={`shop-${shop.id}`} className="itemForm__row">
               <label className="itemForm__label" htmlFor={`item-price-${shop.id}`}>{shop.name}</label>
               <input className="itemForm__input" type="number" step="0.05" name={`item-price-${shop.id}`} defaultValue={0.00} />
             </div>
           ))}
-          <button className="itemForm__button" type="submit">Add Item</button>
+          <div className='btnContCenter'>
+            <button className="itemForm__button" type="submit">Add Item</button>
+          </div>
         </div>
       </form>
     </div>

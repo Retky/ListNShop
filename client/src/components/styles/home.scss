@@ -258,8 +258,27 @@ footer {
 .itemForm {
   background-color: $secondary-color;
   box-sizing:border-box;
+  border-radius: 20px;
   width: 80%;
   padding: 20px;
+
+  h3 {
+    text-align: center;
+    margin-bottom: 0;
+  }
+}
+
+.btnContCenter {
+  margin-top: 10px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.closeItemBtn {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
 }
 
 .shopsView {
