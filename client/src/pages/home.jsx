@@ -153,7 +153,9 @@ const Home = () => {
   const shopsList = (
     <div className="shopListContainer" style={showShops ? { display: 'flex' } : { display: 'none' }}>
       <div className="shopsView">
-        <FontAwesomeIcon icon={faCircleXmark} onClick={() => setShowShops(false)} />
+        <div className='closeItemBtn'>
+          <FontAwesomeIcon icon={faCircleXmark} onClick={() => setShowShops(false)} />
+        </div>
         <ul className="shopList">
           {shops.map((shop) => (
             <div key={`shop-${shop.id}`} className="price" onClick={handleModShopClick} onBlur={handleModShopSubmit} shop={shop.id}>
