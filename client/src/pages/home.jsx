@@ -1,8 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlus, faCircleXmark, faTrash } from '@fortawesome/free-solid-svg-icons';
-
+import { faPlus, faCircleXmark, faTrash, faShop, faList, faFloppyDisk, faBasketShopping } from '@fortawesome/free-solid-svg-icons';
 import { fetchLocalLists } from '../redux/lists';
 import { fetchLocalShops, addLocalShop, updateLocalShop, deleteLocalShop } from '../redux/shops';
 import { fetchLocalItems, updateLocalItemQuantity, incLocalItemQuantity, decLocalItemQuantity, addLocalItem, deleteLocalItem } from '../redux/items';
@@ -285,15 +284,27 @@ const Home = () => {
       {itemForm}
       {shopsList}
       <footer>
-        <div className='button'>Save</div>
-        <div className='button'>Lists</div>
+        <div className='button'>
+          <FontAwesomeIcon icon={faList} />
+          Lists
+        </div>
+        <div className='button'>
+          <FontAwesomeIcon icon={faFloppyDisk} />
+          Save
+        </div>
         <div>
           <div className='addBtn' onClick={handleAddItem}>
             <FontAwesomeIcon className='plus' icon={faPlus} />
           </div>
         </div>
-        <div className='button' onClick={() => setShowShops(true)}>Shops</div>
-        <div className='button'>Items</div>
+        <div className='button' onClick={() => setShowShops(true)}>
+          <FontAwesomeIcon icon={faShop} />
+          Shops
+        </div>
+        <div className='button'>
+          <FontAwesomeIcon icon={faBasketShopping} />
+          Items
+        </div>
       </footer>
     </div>
   );
