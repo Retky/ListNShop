@@ -284,11 +284,11 @@ const Home = () => {
       {itemForm}
       {shopsList}
       <footer>
-        <div className='button'>
+        <div className='button disableBtn'>
           <FontAwesomeIcon icon={faList} />
           Lists
         </div>
-        <div className='button'>
+        <div className='button disableBtn'>
           <FontAwesomeIcon icon={faFloppyDisk} />
           Save
         </div>
@@ -301,7 +301,7 @@ const Home = () => {
           <FontAwesomeIcon icon={faShop} />
           Shops
         </div>
-        <div className='button'>
+        <div className='button disableBtn'>
           <FontAwesomeIcon icon={faBasketShopping} />
           Items
         </div>
