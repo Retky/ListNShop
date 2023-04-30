@@ -16,7 +16,7 @@
 
 ## 📷 Preview
 
-![Preview](/.preview/image.png)
+![Preview](/.preview/imageHover.png)
 
 
 ## 🔗 Live Demo
