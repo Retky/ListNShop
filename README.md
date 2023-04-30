@@ -1,6 +1,6 @@
 # ListNShop
 
-> An application to help keep track of shopping lists, allowing the user to compare prices from different stores.
+> "List N Shop" is a React.js and SCSS web app for mobile that allows users to easily manage their shopping lists, compare prices and quantities from different shops, and make informed buying decisions. With local save functionality.
 
 
 ## 🛠️ Build with
@@ -12,6 +12,16 @@
 ![](https://img.shields.io/badge/SCSS-CC6699.svg?logo=sass&logoColor=white)
 ![](https://img.shields.io/badge/React-61DAFB.svg?logo=react&logoColor=black)
 ![](https://img.shields.io/badge/Redux-764ABC.svg?logo=redux&logoColor=white)
+
+
+## 📷 Preview
+
+![Preview](/.preview/imageHover.png)
+
+
+## 🔗 Live Demo
+
+[Live Demo Link](https://retky.github.io/ListNShop/)
 
 
 ## 👤 Author

@@ -1,8 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlus, faCircleXmark, faTrash } from '@fortawesome/free-solid-svg-icons';
-
+import { faPlus, faCircleXmark, faTrash, faShop, faList, faFloppyDisk, faBasketShopping } from '@fortawesome/free-solid-svg-icons';
 import { fetchLocalLists } from '../redux/lists';
 import { fetchLocalShops, addLocalShop, updateLocalShop, deleteLocalShop } from '../redux/shops';
 import { fetchLocalItems, updateLocalItemQuantity, incLocalItemQuantity, decLocalItemQuantity, addLocalItem, deleteLocalItem } from '../redux/items';
@@ -110,7 +109,9 @@ const Home = () => {
   const itemForm = (
     <div className="itemFormContainer" style={showForm ? { display: 'flex' } : { display: 'none' }}>
       <form className="itemForm" onSubmit={handleAddItemSubmit}>
-        <FontAwesomeIcon icon={faCircleXmark} onClick={() => setShowForm(false)} />
+        <div className="closeItemBtn">
+          <FontAwesomeIcon icon={faCircleXmark} onClick={() => setShowForm(false)} />
+        </div>
         <div className="itemForm__row">
           <label className="itemForm__label" htmlFor="item-name">Item Name</label>
           <input className="itemForm__input" type="text" name="item-name" required />
@@ -124,14 +125,16 @@ const Home = () => {
           <input className="itemForm__input" type="text" name="item-unit" required />
         </div>
         <div className="itemForm__row">
-          <label className="itemForm__label" htmlFor="item-price">Prices</label>
+          <h3 className="itemForm__label" htmlFor="item-price">Prices</h3>
           {shops.map((shop) => (
             <div key={`shop-${shop.id}`} className="itemForm__row">
               <label className="itemForm__label" htmlFor={`item-price-${shop.id}`}>{shop.name}</label>
               <input className="itemForm__input" type="number" step="0.05" name={`item-price-${shop.id}`} defaultValue={0.00} />
             </div>
           ))}
-          <button className="itemForm__button" type="submit">Add Item</button>
+          <div className='btnContCenter'>
+            <button className="itemForm__button" type="submit">Add Item</button>
+          </div>
         </div>
       </form>
     </div>
@@ -149,7 +152,9 @@ const Home = () => {
   const shopsList = (
     <div className="shopListContainer" style={showShops ? { display: 'flex' } : { display: 'none' }}>
       <div className="shopsView">
-        <FontAwesomeIcon icon={faCircleXmark} onClick={() => setShowShops(false)} />
+        <div className='closeItemBtn'>
+          <FontAwesomeIcon icon={faCircleXmark} onClick={() => setShowShops(false)} />
+        </div>
         <ul className="shopList">
           {shops.map((shop) => (
             <div key={`shop-${shop.id}`} className="price" onClick={handleModShopClick} onBlur={handleModShopSubmit} shop={shop.id}>
@@ -195,8 +200,10 @@ const Home = () => {
                     <input type="checkbox" />
                   </div>
                   <div className="itemInfo">
-                    <div className="itemName">{item.name}</div>
-                    <FontAwesomeIcon icon={faTrash} onClick={handleDelItem} item={item.id} />
+                    <div className="itemName">
+                      <p>{item.name}</p>
+                      <FontAwesomeIcon icon={faTrash} onClick={handleDelItem} item={item.id} />
+                    </div>
                     <div className="itemMeasure">
                       <div className="itemQuantity">
                         <div className="unity-bar">
@@ -277,15 +284,27 @@ const Home = () => {
       {itemForm}
       {shopsList}
       <footer>
-        <div className='button'>Save</div>
-        <div className='button'>Lists</div>
+        <div className='button disableBtn'>
+          <FontAwesomeIcon icon={faList} />
+          Lists
+        </div>
+        <div className='button disableBtn'>
+          <FontAwesomeIcon icon={faFloppyDisk} />
+          Save
+        </div>
         <div>
           <div className='addBtn' onClick={handleAddItem}>
             <FontAwesomeIcon className='plus' icon={faPlus} />
           </div>
         </div>
-        <div className='button' onClick={() => setShowShops(true)}>Shops</div>
-        <div className='button'>Items</div>
+        <div className='button' onClick={() => setShowShops(true)}>
+          <FontAwesomeIcon icon={faShop} />
+          Shops
+        </div>
+        <div className='button disableBtn'>
+          <FontAwesomeIcon icon={faBasketShopping} />
+          Items
+        </div>
       </footer>
     </div>
   );

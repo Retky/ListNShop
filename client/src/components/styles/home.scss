@@ -37,6 +37,8 @@
         text-align: center;
         font-size: 15px;
         border-left: #e0e0e0 2px groove;
+        display: grid;
+        place-items: center;
       }
     }
     &:nth-child(even) {
@@ -47,6 +49,8 @@
         text-align: center;
         font-size: 15px;
         border-left: #e0e0e0 2px groove;
+        display: grid;
+        place-items: center;
       }
     }
     &:last-child {
@@ -111,6 +115,17 @@
 .item {
   display: flex;
   align-items: center;
+}
+
+.itemName {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  p {
+    margin: 0;
+    text-align: center;
+  }
 }
 
 .itemMeasure {
@@ -202,6 +217,8 @@ footer {
     display: flex;
     cursor: pointer;
     @include box-button($button-color);
+    color: #fff;
+    text-shadow: 0 0 1px #aaa, 0 0 1px #aaa;
   }
 
   .addBtn {
@@ -240,10 +257,45 @@ footer {
   z-index: 7;
 }
 
+.itemForm {
+  background-color: $secondary-color;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  box-sizing:border-box;
+  border-radius: 20px;
+  width: 80%;
+  padding: 20px;
+  border: 1px solid $accent-color;
+
+  h3 {
+    text-align: center;
+    margin-bottom: 0;
+  }
+}
+
+.itemForm__input {
+  width: 100%;
+}
+
+.btnContCenter {
+  margin-top: 10px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.closeItemBtn {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+}
+
 .shopsView {
-  background-color: #e0e0e0;
+  background-color: $secondary-color;
+  width: 80%;
   border-radius: 10px;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border: 1px solid $accent-color;
+  padding: 20px;
 }
 
 .shopListContainer {
@@ -258,9 +310,19 @@ footer {
   z-index: 7;
 }
 
+.shopForm__input {
+  width:65%;
+}
+
 .shopList {
+  margin: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 20px;
+  padding: 0;
+}
+
+.disableBtn {
+  color: $accent-color !important;
+  text-shadow: none !important;
 }
