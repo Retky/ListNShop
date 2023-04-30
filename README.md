@@ -14,6 +14,16 @@
 ![](https://img.shields.io/badge/Redux-764ABC.svg?logo=redux&logoColor=white)
 
 
+## 📷 Preview
+
+![Preview](/.preview/image.png)
+
+
+## 🔗 Live Demo
+
+[Live Demo Link](https://retky.github.io/ListNShop/)
+
+
 ## 👤 Author
 
 **J. Luis Arredondo (Retky)**
