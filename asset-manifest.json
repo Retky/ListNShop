@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/ListNShop/static/css/main.38deae07.css",
-    "main.js": "/ListNShop/static/js/main.69d49d92.js",
+    "main.css": "/ListNShop/static/css/main.9ec7814c.css",
+    "main.js": "/ListNShop/static/js/main.a66c5e53.js",
     "index.html": "/ListNShop/index.html",
-    "main.38deae07.css.map": "/ListNShop/static/css/main.38deae07.css.map",
-    "main.69d49d92.js.map": "/ListNShop/static/js/main.69d49d92.js.map"
+    "main.9ec7814c.css.map": "/ListNShop/static/css/main.9ec7814c.css.map",
+    "main.a66c5e53.js.map": "/ListNShop/static/js/main.a66c5e53.js.map"
   },
   "entrypoints": [
-    "static/css/main.38deae07.css",
-    "static/js/main.69d49d92.js"
+    "static/css/main.9ec7814c.css",
+    "static/js/main.a66c5e53.js"
   ]
 }
